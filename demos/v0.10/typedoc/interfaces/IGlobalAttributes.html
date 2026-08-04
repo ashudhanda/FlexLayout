@@ -91,7 +91,7 @@
 <h3 class="tsd-anchor-link" id="borderclassname"><code class="tsd-tag">Optional</code><span>border<wbr/>Class<wbr/>Name</span><a href="#borderclassname" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">borderClassName</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
 <div class="tsd-comment tsd-typography"><p>Value for BorderNode attribute className if not overridden</p>
-<p>class applied to tab button</p>
+<p>class applied to the border container</p>
 <p>Default: undefined</p>
 </div></section>
 <section class="tsd-panel tsd-member">
@@ -165,14 +165,14 @@ style auto hide), see the borderType attribute</p>
 <h3 class="tsd-anchor-link" id="tabborderheight"><code class="tsd-tag">Optional</code><span>tab<wbr/>Border<wbr/>Height</span><a href="#tabborderheight" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">tabBorderHeight</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
 <div class="tsd-comment tsd-typography"><p>Value for TabNode attribute borderHeight if not overridden</p>
-<p>height when added to border, -1 will use border size</p>
+<p>the height of this tab when shown in a border; -1 uses the border's default size</p>
 <p>Default: -1</p>
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="tabborderwidth"><code class="tsd-tag">Optional</code><span>tab<wbr/>Border<wbr/>Width</span><a href="#tabborderwidth" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">tabBorderWidth</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
 <div class="tsd-comment tsd-typography"><p>Value for TabNode attribute borderWidth if not overridden</p>
-<p>width when added to border, -1 will use border size</p>
+<p>the width of this tab when shown in a border; -1 uses the border's default size</p>
 <p>Default: -1</p>
 </div></section>
 <section class="tsd-panel tsd-member">
@@ -186,7 +186,7 @@ style auto hide), see the borderType attribute</p>
 <h3 class="tsd-anchor-link" id="tabclosetype"><code class="tsd-tag">Optional</code><span>tab<wbr/>Close<wbr/>Type</span><a href="#tabclosetype" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">tabCloseType</span><span class="tsd-signature-symbol">?:</span> <a href="../enums/ICloseType.html" class="tsd-signature-type tsd-kind-enum">ICloseType</a></div>
 <div class="tsd-comment tsd-typography"><p>Value for TabNode attribute closeType if not overridden</p>
-<p>see values in ICloseType</p>
+<p>when the tab's close button is active: Visible (default) active if selected or hovered (note: mobile doesnt support hovered), Always: always active, Selected only active on selected tab (clicking on the x button on a non-selected tab will just select it)</p>
 <p>Default: 1</p>
 </div></section>
 <section class="tsd-panel tsd-member">
@@ -200,14 +200,14 @@ style auto hide), see the borderType attribute</p>
 <h3 class="tsd-anchor-link" id="tabenableclose"><code class="tsd-tag">Optional</code><span>tab<wbr/>Enable<wbr/>Close</span><a href="#tabenableclose" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">tabEnableClose</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
 <div class="tsd-comment tsd-typography"><p>Value for TabNode attribute enableClose if not overridden</p>
-<p>allow user to close tab via close button</p>
+<p>whether the tab can be closed by the user via its close button</p>
 <p>Default: true</p>
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="tabenabledrag"><code class="tsd-tag">Optional</code><span>tab<wbr/>Enable<wbr/>Drag</span><a href="#tabenabledrag" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">tabEnableDrag</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
 <div class="tsd-comment tsd-typography"><p>Value for TabNode attribute enableDrag if not overridden</p>
-<p>allow user to drag tab to new location</p>
+<p>whether the user can drag the tab to a new location</p>
 <p>Default: true</p>
 </div></section>
 <section class="tsd-panel tsd-member">
@@ -243,7 +243,7 @@ then enabling this option will gray out this tab</p>
 <h3 class="tsd-anchor-link" id="tabenablerename"><code class="tsd-tag">Optional</code><span>tab<wbr/>Enable<wbr/>Rename</span><a href="#tabenablerename" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">tabEnableRename</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
 <div class="tsd-comment tsd-typography"><p>Value for TabNode attribute enableRename if not overridden</p>
-<p>allow user to rename tabs by double clicking</p>
+<p>whether the user can rename the tab by double clicking</p>
 <p>Default: true</p>
 </div></section>
 <section class="tsd-panel tsd-member">
@@ -271,28 +271,28 @@ then enabling this option will gray out this tab</p>
 <h3 class="tsd-anchor-link" id="tabmaxheight"><code class="tsd-tag">Optional</code><span>tab<wbr/>Max<wbr/>Height</span><a href="#tabmaxheight" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">tabMaxHeight</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
 <div class="tsd-comment tsd-typography"><p>Value for TabNode attribute maxHeight if not overridden</p>
-<p>the max height of this tab</p>
+<p>the maximum height (in px) of this tab</p>
 <p>Default: 99999</p>
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="tabmaxwidth"><code class="tsd-tag">Optional</code><span>tab<wbr/>Max<wbr/>Width</span><a href="#tabmaxwidth" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">tabMaxWidth</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
 <div class="tsd-comment tsd-typography"><p>Value for TabNode attribute maxWidth if not overridden</p>
-<p>the max width of this tab</p>
+<p>the maximum width (in px) of this tab</p>
 <p>Default: 99999</p>
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="tabminheight"><code class="tsd-tag">Optional</code><span>tab<wbr/>Min<wbr/>Height</span><a href="#tabminheight" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">tabMinHeight</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
 <div class="tsd-comment tsd-typography"><p>Value for TabNode attribute minHeight if not overridden</p>
-<p>the min height of this tab</p>
+<p>the minimum height (in px) of this tab</p>
 <p>Default: 1</p>
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="tabminwidth"><code class="tsd-tag">Optional</code><span>tab<wbr/>Min<wbr/>Width</span><a href="#tabminwidth" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">tabMinWidth</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
 <div class="tsd-comment tsd-typography"><p>Value for TabNode attribute minWidth if not overridden</p>
-<p>the min width of this tab</p>
+<p>the minimum width (in px) of this tab</p>
 <p>Default: 1</p>
 </div></section>
 <section class="tsd-panel tsd-member">
@@ -320,7 +320,7 @@ then enabling this option will gray out this tab</p>
 <h3 class="tsd-anchor-link" id="tabsetenableclose"><code class="tsd-tag">Optional</code><span>tab<wbr/>Set<wbr/>Enable<wbr/>Close</span><a href="#tabsetenableclose" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">tabSetEnableClose</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
 <div class="tsd-comment tsd-typography"><p>Value for TabSetNode attribute enableClose if not overridden</p>
-<p>can this tabset be closed</p>
+<p>whether this tabset can be closed</p>
 <p>Default: true</p>
 </div></section>
 <section class="tsd-panel tsd-member">
@@ -334,35 +334,35 @@ then enabling this option will gray out this tab</p>
 <h3 class="tsd-anchor-link" id="tabsetenabledeletewhenempty"><code class="tsd-tag">Optional</code><span>tab<wbr/>Set<wbr/>Enable<wbr/>Delete<wbr/>When<wbr/>Empty</span><a href="#tabsetenabledeletewhenempty" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">tabSetEnableDeleteWhenEmpty</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
 <div class="tsd-comment tsd-typography"><p>Value for TabSetNode attribute enableDeleteWhenEmpty if not overridden</p>
-<p>whether to delete this tabset when is has no tabs</p>
+<p>whether to delete this tabset when it has no tabs</p>
 <p>Default: true</p>
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="tabsetenabledivide"><code class="tsd-tag">Optional</code><span>tab<wbr/>Set<wbr/>Enable<wbr/>Divide</span><a href="#tabsetenabledivide" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">tabSetEnableDivide</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
 <div class="tsd-comment tsd-typography"><p>Value for TabSetNode attribute enableDivide if not overridden</p>
-<p>allow user to drag tabs to region of this tabset, splitting into new tabset</p>
+<p>whether dropping on an edge of this tabset splits it to create a new tabset</p>
 <p>Default: true</p>
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="tabsetenabledrag"><code class="tsd-tag">Optional</code><span>tab<wbr/>Set<wbr/>Enable<wbr/>Drag</span><a href="#tabsetenabledrag" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">tabSetEnableDrag</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
 <div class="tsd-comment tsd-typography"><p>Value for TabSetNode attribute enableDrag if not overridden</p>
-<p>allow user to drag tabs out this tabset</p>
+<p>whether the user can drag tabs out of this tabset</p>
 <p>Default: true</p>
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="tabsetenabledrop"><code class="tsd-tag">Optional</code><span>tab<wbr/>Set<wbr/>Enable<wbr/>Drop</span><a href="#tabsetenabledrop" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">tabSetEnableDrop</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
 <div class="tsd-comment tsd-typography"><p>Value for TabSetNode attribute enableDrop if not overridden</p>
-<p>allow user to drag tabs into this tabset</p>
+<p>whether tabs can be dropped into this tabset</p>
 <p>Default: true</p>
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="tabsetenablemaximize"><code class="tsd-tag">Optional</code><span>tab<wbr/>Set<wbr/>Enable<wbr/>Maximize</span><a href="#tabsetenablemaximize" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">tabSetEnableMaximize</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
 <div class="tsd-comment tsd-typography"><p>Value for TabSetNode attribute enableMaximize if not overridden</p>
-<p>allow user to maximize tabset to fill view via maximize button</p>
+<p>whether the tabset can be maximized to fill the layout via the maximize button</p>
 <p>Default: true</p>
 </div></section>
 <section class="tsd-panel tsd-member">
@@ -383,7 +383,7 @@ then enabling this option will gray out this tab</p>
 <h3 class="tsd-anchor-link" id="tabsetenabletabstrip"><code class="tsd-tag">Optional</code><span>tab<wbr/>Set<wbr/>Enable<wbr/>Tab<wbr/>Strip</span><a href="#tabsetenabletabstrip" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">tabSetEnableTabStrip</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
 <div class="tsd-comment tsd-typography"><p>Value for TabSetNode attribute enableTabStrip if not overridden</p>
-<p>enable tab strip and allow multiple tabs in this tabset</p>
+<p>when enabled the tabset shows a tab strip and can host multiple tabs; when disabled the strip is hidden</p>
 <p>Default: true</p>
 </div></section>
 <section class="tsd-panel tsd-member">

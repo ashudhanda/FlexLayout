@@ -55,19 +55,19 @@
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="altname"><code class="tsd-tag">Optional</code><span>alt<wbr/>Name</span><a href="#altname" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">altName</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
-<div class="tsd-comment tsd-typography"><p>if there is no name specifed then this value will be used in the overflow menu</p>
+<div class="tsd-comment tsd-typography"><p>the name used in the overflow menu when the tab has no name (e.g. an icon-only tab)</p>
 <p>Default: undefined</p>
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="borderheight"><code class="tsd-tag">Optional</code><span>border<wbr/>Height</span><a href="#borderheight" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">borderHeight</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
-<div class="tsd-comment tsd-typography"><p>height when added to border, -1 will use border size</p>
+<div class="tsd-comment tsd-typography"><p>the height of this tab when shown in a border; -1 uses the border's default size</p>
 <p>Default: inherited from Global attribute tabBorderHeight (default -1)</p>
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="borderwidth"><code class="tsd-tag">Optional</code><span>border<wbr/>Width</span><a href="#borderwidth" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">borderWidth</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
-<div class="tsd-comment tsd-typography"><p>width when added to border, -1 will use border size</p>
+<div class="tsd-comment tsd-typography"><p>the width of this tab when shown in a border; -1 uses the border's default size</p>
 <p>Default: inherited from Global attribute tabBorderWidth (default -1)</p>
 </div></section>
 <section class="tsd-panel tsd-member">
@@ -79,7 +79,7 @@
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="closetype"><code class="tsd-tag">Optional</code><span>close<wbr/>Type</span><a href="#closetype" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">closeType</span><span class="tsd-signature-symbol">?:</span> <a href="../enums/ICloseType.html" class="tsd-signature-type tsd-kind-enum">ICloseType</a></div>
-<div class="tsd-comment tsd-typography"><p>see values in ICloseType</p>
+<div class="tsd-comment tsd-typography"><p>when the tab's close button is active: Visible (default) active if selected or hovered (note: mobile doesnt support hovered), Always: always active, Selected only active on selected tab (clicking on the x button on a non-selected tab will just select it)</p>
 <p>Default: inherited from Global attribute tabCloseType (default 1)</p>
 </div></section>
 <section class="tsd-panel tsd-member">
@@ -103,13 +103,13 @@
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="enableclose"><code class="tsd-tag">Optional</code><span>enable<wbr/>Close</span><a href="#enableclose" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">enableClose</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
-<div class="tsd-comment tsd-typography"><p>allow user to close tab via close button</p>
+<div class="tsd-comment tsd-typography"><p>whether the tab can be closed by the user via its close button</p>
 <p>Default: inherited from Global attribute tabEnableClose (default true)</p>
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="enabledrag"><code class="tsd-tag">Optional</code><span>enable<wbr/>Drag</span><a href="#enabledrag" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">enableDrag</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
-<div class="tsd-comment tsd-typography"><p>allow user to drag tab to new location</p>
+<div class="tsd-comment tsd-typography"><p>whether the user can drag the tab to a new location</p>
 <p>Default: inherited from Global attribute tabEnableDrag (default true)</p>
 </div></section>
 <section class="tsd-panel tsd-member">
@@ -140,7 +140,7 @@ then enabling this option will gray out this tab</p>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="enablerename"><code class="tsd-tag">Optional</code><span>enable<wbr/>Rename</span><a href="#enablerename" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">enableRename</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
-<div class="tsd-comment tsd-typography"><p>allow user to rename tabs by double clicking</p>
+<div class="tsd-comment tsd-typography"><p>whether the user can rename the tab by double clicking</p>
 <p>Default: inherited from Global attribute tabEnableRename (default true)</p>
 </div></section>
 <section class="tsd-panel tsd-member">
@@ -164,7 +164,7 @@ then enabling this option will gray out this tab</p>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="helptext"><code class="tsd-tag">Optional</code><span>help<wbr/>Text</span><a href="#helptext" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">helpText</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
-<div class="tsd-comment tsd-typography"><p>help text for the tab to be displayed upon tab hover.</p>
+<div class="tsd-comment tsd-typography"><p>help text for the tab to be displayed upon tab hover</p>
 <p>Default: undefined</p>
 </div></section>
 <section class="tsd-panel tsd-member">
@@ -182,25 +182,25 @@ then enabling this option will gray out this tab</p>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="maxheight"><code class="tsd-tag">Optional</code><span>max<wbr/>Height</span><a href="#maxheight" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">maxHeight</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
-<div class="tsd-comment tsd-typography"><p>the max height of this tab</p>
+<div class="tsd-comment tsd-typography"><p>the maximum height (in px) of this tab</p>
 <p>Default: inherited from Global attribute tabMaxHeight (default 99999)</p>
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="maxwidth"><code class="tsd-tag">Optional</code><span>max<wbr/>Width</span><a href="#maxwidth" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">maxWidth</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
-<div class="tsd-comment tsd-typography"><p>the max width of this tab</p>
+<div class="tsd-comment tsd-typography"><p>the maximum width (in px) of this tab</p>
 <p>Default: inherited from Global attribute tabMaxWidth (default 99999)</p>
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="minheight"><code class="tsd-tag">Optional</code><span>min<wbr/>Height</span><a href="#minheight" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">minHeight</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
-<div class="tsd-comment tsd-typography"><p>the min height of this tab</p>
+<div class="tsd-comment tsd-typography"><p>the minimum height (in px) of this tab</p>
 <p>Default: inherited from Global attribute tabMinHeight (default 1)</p>
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="minwidth"><code class="tsd-tag">Optional</code><span>min<wbr/>Width</span><a href="#minwidth" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">minWidth</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
-<div class="tsd-comment tsd-typography"><p>the min width of this tab</p>
+<div class="tsd-comment tsd-typography"><p>the minimum width (in px) of this tab</p>
 <p>Default: inherited from Global attribute tabMinWidth (default 1)</p>
 </div></section>
 <section class="tsd-panel tsd-member">
