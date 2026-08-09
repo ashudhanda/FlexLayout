@@ -61,12 +61,15 @@
 <h3 class="tsd-anchor-link" id="addchangelistener"><span>add<wbr/>Change<wbr/>Listener</span><a href="#addchangelistener" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
-<div class="tsd-signature tsd-anchor-link" id="addchangelistener-1"><span class="tsd-kind-call-signature">addChangeListener</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">listener</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">action</span><span class="tsd-signature-symbol">:</span> <a href="Action.html" class="tsd-signature-type tsd-kind-class">Action</a><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#addchangelistener-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-signature tsd-anchor-link" id="addchangelistener-1"><span class="tsd-kind-call-signature">addChangeListener</span><span class="tsd-signature-symbol">(</span><br/>    <span class="tsd-kind-parameter">listener</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/ModelChangeListener.html" class="tsd-signature-type tsd-kind-interface">ModelChangeListener</a> <span class="tsd-signature-symbol">|</span> (<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">action</span><span class="tsd-signature-symbol">:</span> <a href="Action.html" class="tsd-signature-type tsd-kind-class">Action</a><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">void</span>)<span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#addchangelistener-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Register a change listener (ModelChangeListener or legacy function).
+Fires for every action, including direct <code>model.doAction</code> calls.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><span class="tsd-kind-parameter">listener</span>: <span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">action</span><span class="tsd-signature-symbol">:</span> <a href="Action.html" class="tsd-signature-type tsd-kind-class">Action</a><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">void</span></span></li></ul></div>
+<li><span><span class="tsd-kind-parameter">listener</span>: <a href="../interfaces/ModelChangeListener.html" class="tsd-signature-type tsd-kind-interface">ModelChangeListener</a> <span class="tsd-signature-symbol">|</span> (<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">action</span><span class="tsd-signature-symbol">:</span> <a href="Action.html" class="tsd-signature-type tsd-kind-class">Action</a><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">void</span>)</span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="doaction"><span>do<wbr/>Action</span><a href="#doaction" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
@@ -203,12 +206,17 @@ Actions should be generated via static methods on the Actions class</p>
 <h3 class="tsd-anchor-link" id="removechangelistener"><span>remove<wbr/>Change<wbr/>Listener</span><a href="#removechangelistener" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
-<div class="tsd-signature tsd-anchor-link" id="removechangelistener-1"><span class="tsd-kind-call-signature">removeChangeListener</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">listener</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">action</span><span class="tsd-signature-symbol">:</span> <a href="Action.html" class="tsd-signature-type tsd-kind-class">Action</a><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#removechangelistener-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-signature tsd-anchor-link" id="removechangelistener-1"><span class="tsd-kind-call-signature">removeChangeListener</span><span class="tsd-signature-symbol">(</span><br/>    <span class="tsd-kind-parameter">listener</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/ModelChangeListener.html" class="tsd-signature-type tsd-kind-interface">ModelChangeListener</a> <span class="tsd-signature-symbol">|</span> (<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">action</span><span class="tsd-signature-symbol">:</span> <a href="Action.html" class="tsd-signature-type tsd-kind-class">Action</a><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">void</span>)<span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#removechangelistener-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Removes a listener previously registered with <code>addChangeListener</code> (either a function or a
+<code>ModelChangeListener</code> object)</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><span class="tsd-kind-parameter">listener</span>: <span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">action</span><span class="tsd-signature-symbol">:</span> <a href="Action.html" class="tsd-signature-type tsd-kind-class">Action</a><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">void</span></span></li></ul></div>
+<li><span><span class="tsd-kind-parameter">listener</span>: <a href="../interfaces/ModelChangeListener.html" class="tsd-signature-type tsd-kind-interface">ModelChangeListener</a> <span class="tsd-signature-symbol">|</span> (<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">action</span><span class="tsd-signature-symbol">:</span> <a href="Action.html" class="tsd-signature-type tsd-kind-class">Action</a><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">void</span>)</span>
+<div class="tsd-comment tsd-typography"><p>the listener to remove</p>
+</div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="setonallowdrop"><span>set<wbr/>On<wbr/>Allow<wbr/>Drop</span><a href="#setonallowdrop" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
@@ -313,25 +321,16 @@ called automatically when the definitions are accessed.</p>
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="fromjson-1"><span class="tsd-kind-call-signature">fromJson</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">json</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/IJsonModel.html" class="tsd-signature-type tsd-kind-interface">IJsonModel</a><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">previousModel</span><span class="tsd-signature-symbol">?:</span> <a href="" class="tsd-signature-type tsd-kind-class">Model</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="" class="tsd-signature-type tsd-kind-class">Model</a><a href="#fromjson-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Loads the model from the given json object.</p>
-<p>Note: the recommended way to change an existing layout is to mutate the current model via
-actions (<code>model.doAction(...)</code>), which updates the layout incrementally and preserves view
-state.</p>
+<div class="tsd-comment tsd-typography"><p>Load a model from JSON.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><span class="tsd-kind-parameter">json</span>: <a href="../interfaces/IJsonModel.html" class="tsd-signature-type tsd-kind-interface">IJsonModel</a></span>
-<div class="tsd-comment tsd-typography"><p>the json model to load</p>
-</div></li>
+<li><span><span class="tsd-kind-parameter">json</span>: <a href="../interfaces/IJsonModel.html" class="tsd-signature-type tsd-kind-interface">IJsonModel</a></span></li>
 <li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">previousModel</span>: <a href="" class="tsd-signature-type tsd-kind-class">Model</a></span>
-<div class="tsd-comment tsd-typography"><p>optional model currently in use by the layout; when given, tabs with
-matching ids adopt the previous model's view state (mounted tab contents, scroll positions),
-so the layout updates in place without remounting the tab contents. Use when replacing an
-existing layout's model with a modified copy of its json.</p>
+<div class="tsd-comment tsd-typography"><p>optional; when given, matching tabs adopt its view state (no remount).</p>
 </div></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type tsd-kind-class">Model</a></h4><p>a new Model object</p>
-</div></li></ul></section></section></details></div>
+<h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type tsd-kind-class">Model</a></h4></div></li></ul></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
