@@ -126,7 +126,7 @@ const model = Model.fromJson(json);
 function App() {
 
   const factory = (node) => {
-    const component = node.getComponent();
+    const component = node.getComponent;
 
     if (component === "placeholder") {
       return <div>{node.getName()}</div>;
