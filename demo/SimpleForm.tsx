@@ -42,11 +42,11 @@ export function SimpleForm() {
             <form style={{ display: "flex", flexDirection: "column", gap: 10 }} onSubmit={handleSubmit}>
                 <label>
                     Username:
-                    <input type="text" name="username" value={formData.username} onChange={handleChange} />
+                    <input type="text" name="username" autoComplete="username" value={formData.username} onChange={handleChange} />
                 </label>
                 <label>
                     Password:
-                    <input type="password" name="password" value={formData.password} onChange={handleChange} />
+                    <input type="password" name="password" autoComplete="current-password" value={formData.password} onChange={handleChange} />
                 </label>
                 <div>{value}</div>
                 <input type="submit" value="Submit" />
