@@ -7,6 +7,9 @@ export function JsonView({ model }: { model: Model }) {
     const [json, setJson] = React.useState<string>(() => highlightModel(model));
 
     React.useEffect(() => {
+        // Re-render the JSON view after each model change, debounced by
+        // 1s so rapid sequences of actions (e.g. dragging a tabset) only
+        // trigger a single expensive Prism highlight pass.
         const onModelChange = () => {
             if (timer.current) {
                 clearTimeout(timer.current);
