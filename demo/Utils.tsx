@@ -1,4 +1,9 @@
 export class Utils {
+    /**
+     * Fetches a file over HTTP and passes its text to onSuccess,
+     * or an error description to onError. Used by the demo to load
+     * model files referenced via URL query parameters.
+     */
     static downloadFile(downloadUrl: any, onSuccess: any, onError: any) {
         console.log("DownloadFile: " + downloadUrl);
         if (downloadUrl) {
@@ -19,6 +24,11 @@ export class Utils {
         }
     }
 
+    /**
+     * Parses window.location.search into a plain object, decoding
+     * URL-encoded values (treating '+' as a space). Used by the demo
+     * to read model-selection and other options from the URL.
+     */
     static getQueryParams() {
         const a = window.location.search.substr(1);
         if (a == "") return {};
