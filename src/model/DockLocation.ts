@@ -1,6 +1,11 @@
 import { Orientation } from "./Orientation";
 import { Rect } from "./Rect";
 
+/**
+ * One of the five drop zones of a dock preview: TOP, BOTTOM, LEFT, RIGHT or CENTER.
+ * `orientation` is the orientation of the new row created by docking there,
+ * and `indexPlus` is the offset added to the target node's index to place the docked item.
+ */
 export class DockLocation {
     static values = new Map<string, DockLocation>();
     static TOP = new DockLocation("top", Orientation.VERT, 0);
@@ -73,7 +78,7 @@ export class DockLocation {
         return this.orientation;
     }
 
-    /** @internal */
+    /** The half-size dock preview rect inside `r` for this location (CENTER covers the whole rect). @internal */
     getDockRect(r: Rect) {
         if (this === DockLocation.TOP) {
             return new Rect(r.x, r.y, r.width, r.height / 2);
