@@ -34,6 +34,10 @@ export abstract class Node {
         this.path = "";
     }
 
+    /**
+     * The node's id: the explicit `id` attribute from the model JSON, or a
+     * generated unique id when the JSON did not provide one.
+     */
     getId() {
         let id = this.attributes.id;
         if (id !== undefined) {
@@ -46,26 +50,32 @@ export abstract class Node {
         return id as string;
     }
 
+    /** The {@link Model} this node belongs to. */
     getModel() {
         return this.model;
     }
 
+    /** The node type string ("row", "tabset", "tab", "border" or "tabgroup"). */
     getType() {
         return this.attributes.type as string;
     }
 
+    /** The parent node, or undefined for the root row of a layout. */
     getParent() {
         return this.parent;
     }
 
+    /** The child nodes; empty for leaf nodes such as tabs. */
     getChildren() {
         return this.children;
     }
 
+    /** The node's current on-screen bounds, assigned during layout. */
     getRect() {
         return this.rect;
     }
 
+    /** The node's tree path (e.g. "/ts1"), assigned by `setPaths`. */
     getPath() {
         return this.path;
     }
