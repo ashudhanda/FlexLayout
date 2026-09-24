@@ -80,6 +80,10 @@ export abstract class Node {
         return this.path;
     }
 
+    /**
+     * True only if every descendant allows closing (a node whose close button
+     * is disabled makes the whole subtree uncloseable).
+     */
     isCloseable() {
         for (let i = 0; i < this.children.length; i++) {
             const child = this.children[i];
@@ -90,6 +94,10 @@ export abstract class Node {
         return true;
     }
 
+    /**
+     * True only if every descendant may be moved into a popout window
+     * (a node that opts out of floating keeps the whole subtree docked).
+     */
     isAllowedInWindow() {
         for (let i = 0; i < this.children.length; i++) {
             const child = this.children[i];
@@ -100,6 +108,10 @@ export abstract class Node {
         return true;
     }
 
+    /**
+     * The orientation this node's children are split along. The root takes the
+     * model's root orientation; every other node flips its parent's orientation.
+     */
     getOrientation(): Orientation {
         if (this.parent === undefined) {
             return this.model.isRootOrientationVertical() ? Orientation.VERT : Orientation.HORZ;
@@ -108,6 +120,7 @@ export abstract class Node {
         }
     }
 
+    /** The id of the layout (main or sub-layout) that contains this node. */
     getLayoutId(): string {
         return this.getLayout().getLayoutId();
     }
@@ -120,6 +133,7 @@ export abstract class Node {
         return this.model.getMainLayout();
     }
 
+    /** The React ref of the {@link Layout} component rendering this node. */
     getLayoutRef() {
         return this.getLayout().getController()!.getLayoutRef();
     }
@@ -143,14 +157,21 @@ export abstract class Node {
         return this.getWindow()?.document;
     }
 
+    /**
+     * Registers a listener for a node lifecycle event ("save", "resize",
+     * "visibility" or "close"). Replaces any listener previously set for the
+     * same event.
+     */
     setEventListener(event: NodeEventType, callback: (params: any) => void) {
         this.listeners.set(event, callback);
     }
 
+    /** Removes the listener previously registered for the given event. */
     removeEventListener(event: NodeEventType) {
         this.listeners.delete(event);
     }
 
+    /** Serialize this node (and its subtree) back to model JSON. */
     abstract toJson(): IJsonRowNode | IJsonBorderNode | IJsonTabSetNode | IJsonTabGroupNode | IJsonTabNode | undefined;
 
     /** @internal */
