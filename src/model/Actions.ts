@@ -366,17 +366,26 @@ export class Action {
     data: Record<string, any>;
     adjusting: boolean;
 
+    /**
+     * @param type the action type (one of the `Actions.*` constants)
+     * @param data the payload for the action
+     */
     constructor(type: string, data: Record<string, any>) {
         this.type = type;
         this.data = data;
         this.adjusting = false;
     }
 
+    /**
+     * Mark this action as part of an ongoing adjustment (e.g. a drag). While adjusting,
+     * model listeners batch the updates instead of treating each step as final.
+     */
     setAdjusting(adjusting: boolean): Action {
         this.adjusting = adjusting;
         return this;
     }
 
+    /** True when this action is part of an ongoing adjustment. */
     isAdjusting(): boolean {
         return this.adjusting;
     }
@@ -396,6 +405,7 @@ export class GroupAction extends Action {
     /** the actions to perform, in order */
     actions: Action[];
 
+    /** @param actions the actions to perform together, in order */
     constructor(actions: Action[]) {
         super(Actions.GROUP, actions as unknown as Record<string, any>);
         this.actions = actions;
