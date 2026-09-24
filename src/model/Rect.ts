@@ -41,11 +41,13 @@ export class Rect {
         this.height = Math.round(this.height / round) * round;
     }
 
+    /** Build a Rect from an element's DOM bounding client rect. */
     static getBoundingClientRect(element: Element) {
         const { x, y, width, height } = element.getBoundingClientRect();
         return new Rect(x, y, width, height);
     }
 
+    /** Build a Rect from a native DOMRect. */
     static fromDomRect(domRect: DOMRect) {
         return new Rect(domRect.x, domRect.y, domRect.width, domRect.height);
     }
@@ -82,10 +84,12 @@ export class Rect {
         return this.x + this.width;
     }
 
+    /** Bottom edge: y + height (property form of {@link getBottom}). */
     get bottom() {
         return this.y + this.height;
     }
 
+    /** Right edge: x + width (property form of {@link getRight}). */
     get right() {
         return this.x + this.width;
     }
@@ -95,10 +99,18 @@ export class Rect {
         return { x: this.x + this.width / 2, y: this.y + this.height / 2 };
     }
 
+    /**
+     * Apply this rect as inline styles to the element, so the element is
+     * positioned and sized exactly over the rect's area.
+     */
     positionElement(element: HTMLElement, position?: React.CSSProperties["position"]) {
         this.styleWithPosition(element.style as any, position);
     }
 
+    /**
+     * Write this rect's bounds into a React style object (clamped to non-negative
+     * sizes) and return it.
+     */
     styleWithPosition(style: React.CSSProperties, position: React.CSSProperties["position"] = "absolute") {
         style.left = this.x + "px";
         style.top = this.y + "px";
