@@ -5,12 +5,19 @@ import { LayoutController, LayoutInternal } from "./layout/LayoutInternal";
 import { TabNode } from "../model/TabNode";
 import { CLASSES } from "./CSSClassNames";
 
+/** props for {@link TabContentRenderer}; the memo comparator re-renders only when the tab is visible and a revision changed */
 export interface ITabContentRenderProps {
+    /** layout controller used to render the tab's component or sub-layout */
     controller: LayoutController;
+    /** the tab whose content is rendered */
     tabNode: TabNode;
+    /** id of the window (main or popout) the tab is currently shown in */
     windowId: string;
+    /** false for hidden tabs, whose content stays mounted but skips re-rendering */
     visible: boolean;
+    /** incremented whenever the whole layout must redraw */
     fullRedrawRevision: number;
+    /** new object identity whenever the parent tabset must redraw */
     parentRedrawRevision: object;
 }
 
