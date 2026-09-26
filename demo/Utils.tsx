@@ -5,7 +5,6 @@ export class Utils {
      * model files referenced via URL query parameters.
      */
     static downloadFile(downloadUrl: any, onSuccess: any, onError: any) {
-        console.log("DownloadFile: " + downloadUrl);
         if (downloadUrl) {
             const xhr = new XMLHttpRequest();
             xhr.open("GET", downloadUrl);
