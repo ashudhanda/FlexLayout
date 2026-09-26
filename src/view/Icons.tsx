@@ -1,3 +1,8 @@
+/**
+ * SVG icons used throughout the layout UI (close, pin, maximize, drag, ...)
+ * based on Material Design glyphs. Icons are `aria-hidden` because their
+ * meaning always comes from the surrounding tooltip or accessible label.
+ */
 const style = { width: "1em", height: "1em", display: "flex", alignItems: "center" };
 
 export const CloseIcon = () => {
