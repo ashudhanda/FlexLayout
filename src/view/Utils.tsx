@@ -102,6 +102,8 @@ export function isAuxMouseEvent(event: React.MouseEvent<HTMLElement, MouseEvent>
     return auxEvent;
 }
 
+/** @internal Toggle pointer-events on embedded iframes/webviews in `currentDocument` so
+ * that drag gestures pass through during a resize or drag operation. */
 export function enablePointerOnIFrames(enable: boolean, currentDocument: Document) {
     const iframes = [...getElementsByTagName("iframe", currentDocument), ...getElementsByTagName("webview", currentDocument)];
 
@@ -110,12 +112,15 @@ export function enablePointerOnIFrames(enable: boolean, currentDocument: Documen
     }
 }
 
+/** @internal Snapshot of a DOM `getElementsByTagName` result as a plain array (safe to mutate). */
 export function getElementsByTagName(tag: string, currentDocument: Document): Element[] {
     return [...currentDocument.getElementsByTagName(tag)];
 }
 
 export let Utils_dragging: boolean = false;
 
+/** @internal Track a pointer drag on `doc`: routes pointermove to `drag(x, y)` and invokes
+ * `dragEnd` on pointerup or `dragCancel` on pointercancel, cleaning up all listeners. */
 export function startDrag(doc: Document, event: React.PointerEvent<HTMLElement>, drag: (x: number, y: number) => void, dragEnd: () => void, dragCancel: () => void) {
     Utils_dragging = true;
     event.preventDefault();
@@ -148,6 +153,7 @@ export function startDrag(doc: Document, event: React.PointerEvent<HTMLElement>,
     doc.addEventListener("pointercancel", pointerCancel);
 }
 
+/** @internal Find the layout hosting the tab whose sublayout is `layout`, if any. */
 export function findParentLayout(layout: ModelLayout): ModelLayout | undefined {
     let parentLayout: ModelLayout | undefined = undefined;
     const model = layout.getController()!.getModel();
@@ -159,6 +165,9 @@ export function findParentLayout(layout: ModelLayout): ModelLayout | undefined {
     return parentLayout;
 }
 
+/** @internal Whether `node` may be docked into `layout`: window/float layouts are always OK,
+ * a tab sublayout rejects nodes that carry their own sublayout, and window-backed tabs
+ * reject nodes that are not allowed in windows. */
 export function canDockToLayout(node: Node, layout: ModelLayout) {
     const type = layout.getType();
     if (type === "window") {
@@ -186,6 +195,7 @@ function containsTabSublayout(node: Node): boolean {
     return node.getChildren().some((child) => containsTabSublayout(child));
 }
 
+/** @internal Copy the inline style attribute from `source` to `target`; returns true when it changed. */
 export function copyInlineStyles(source: HTMLElement, target: HTMLElement): boolean {
     const sourceStyle = source.getAttribute("style");
     const targetStyle = target.getAttribute("style");
@@ -199,11 +209,13 @@ export function copyInlineStyles(source: HTMLElement, target: HTMLElement): bool
     return true;
 }
 
+/** @internal True on genuine Safari (user agent contains "Safari" but neither "Chrome" nor "Chromium"). */
 export function isSafari() {
     const userAgent = navigator.userAgent;
     return userAgent.includes("Safari") && !userAgent.includes("Chrome") && !userAgent.includes("Chromium");
 }
 
+/** @internal Scroll offsets plus full-document and viewport dimensions for `win` (defaults to window). */
 export function getPageMetrics(win: Window = window) {
     const document = win.document;
     return {
