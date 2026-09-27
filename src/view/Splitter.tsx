@@ -29,7 +29,7 @@ export const Splitter = (props: ISplitterProps) => {
     const handleDiv = React.useRef<HTMLDivElement | undefined>(undefined);
     const dragStartX = React.useRef<number>(0);
     const dragStartY = React.useRef<number>(0);
-    const initalSizes = React.useRef<{ initialSizes: number[]; sum: number; startPosition: number }>({ initialSizes: [], sum: 0, startPosition: 0 });
+    const initialSizes = React.useRef<{ initialSizes: number[]; sum: number; startPosition: number }>({ initialSizes: [], sum: 0, startPosition: 0 });
 
     const onTouchStart = React.useCallback((event: TouchEvent) => {
         event.preventDefault();
@@ -51,7 +51,7 @@ export const Splitter = (props: ISplitterProps) => {
     const onPointerDown = (event: React.PointerEvent<HTMLElement>) => {
         event.stopPropagation();
         if (node instanceof RowNode) {
-            initalSizes.current = node.getSplitterInitials(index);
+            initialSizes.current = node.getSplitterInitials(index);
         }
 
         controller.setSplitterDragging(true);
@@ -179,7 +179,7 @@ export const Splitter = (props: ISplitterProps) => {
                     const pos = (node as BorderNode).calculateSplit(node, value);
                     controller.doAction(Actions.adjustBorderSplit(node.getId(), pos).setAdjusting(adjusting));
                 } else {
-                    const init = initalSizes.current;
+                    const init = initialSizes.current;
                     // an unmeasured row (all zero rects) cannot be split: skip rather than emitting
                     // Infinity/NaN weights from a division by the zero sum
                     if (init.sum <= 0) {
