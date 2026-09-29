@@ -9,7 +9,13 @@ export interface ITabButtonStampProps {
     controller: LayoutController;
 }
 
-/** @internal */
+/**
+ * @internal
+ * Static preview of a tab rendered inside the drag rectangle (see DragTabButton).
+ * It is deliberately cheap to render: it reuses the overflow-menu rendering
+ * rather than mounting a full interactive TabButton, and it never moves again
+ * while the drag is in progress.
+ */
 export const TabButtonStamp = (props: ITabButtonStampProps) => {
     const { controller, tabNode } = props;
 
