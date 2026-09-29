@@ -11,12 +11,19 @@ ModuleRegistry.registerModules([
     ValidationModule, // This will turn "Error #200" into a readable text message
 ]);
 
+/** One dispatched model action captured by the demo action log. */
 export interface IActionEntry {
     id: number;
     type: string;
     data: string;
 }
 
+/**
+ * Debug panel for the demo app: renders a live, scrolling log of every action
+ * dispatched on the model (shown in the "Action Log" tab). Adjusting actions
+ * (drag/splitter gestures) are collapsed to their final state, and the log is
+ * capped at 1000 rows so long sessions stay responsive.
+ */
 export const ActionLog = (props: { model: Model }) => {
     const nextActionId = React.useRef<number>(0);
     const [actions, setActions] = React.useState<IActionEntry[]>([]);
