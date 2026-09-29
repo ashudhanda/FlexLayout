@@ -1,3 +1,8 @@
+/**
+ * Demo page listing the newest FlexLayout features. Each list item describes
+ * a feature AND how to try it live in the demo layout, so the list doubles
+ * as an interactive tour — update it whenever a new feature ships.
+ */
 export function NewFeatures() {
     return (
         <ul>
