@@ -33,7 +33,9 @@ export const DragTabButton = React.memo((props: IDragTabButton) => {
     );
 }, arePropsEqual);
 
-// pause rendering while dragging
+// Freeze the stamp while a drag is in progress: returning `dragging` skips
+// re-renders only while dragging is true, so the preview under the cursor
+// stays stable; when the drag ends it renders normally again.
 function arePropsEqual(prevProps: IDragTabButton, nextProps: IDragTabButton) {
     return nextProps.dragging;
 }
