@@ -758,6 +758,18 @@ pnpm dev
 
 The `pnpm dev` command watches for changes in both FlexLayout and the Demo app, allowing you to see updates in your browser immediately.
 
+### Demo options
+
+The demo accepts a `layout` URL query parameter to choose which layout to load:
+
+```
+http://localhost:5173/?layout=my-layout
+```
+
+On first load it fetches `layouts/my-layout.layout` from the demo server. When the page
+closes, the current layout is saved in the browser's localStorage under that name and
+reloaded from there on subsequent visits. Omitting the parameter uses the `default` layout.
+
 Run the unit tests with:
 
 ```bash
