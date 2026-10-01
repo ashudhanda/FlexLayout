@@ -1,3 +1,6 @@
+/* ---------------------------------------------------------------------------
+ * Base page layout and shared demo styles
+ * --------------------------------------------------------------------------- */
 html,
 body {
     margin: 0;
@@ -69,6 +72,9 @@ body {
     background-color: #eeeeff;
 }
 
+/* ---------------------------------------------------------------------------
+ * Table used by the demo tabs to show key/value pairs
+ * --------------------------------------------------------------------------- */
 .simple_table {
     border-collapse: collapse;
     font-size: 14px;
@@ -85,6 +91,9 @@ body {
     padding: 6px;
 }
 
+/* ---------------------------------------------------------------------------
+ * Theme-specific overrides (selected via the demo's theme picker)
+ * --------------------------------------------------------------------------- */
 .flexlayout__theme_light,
 .flexlayout__theme_alpha_light,
 .flexlayout__theme_gray,
@@ -159,6 +168,9 @@ body {
     }
 }
 
+/* ---------------------------------------------------------------------------
+ * Debug view: outlines rows and tabsets when the "show layout" toggle is on
+ * --------------------------------------------------------------------------- */
 .showLayout .flexlayout__row {
     margin: 5px;
     border: 3px solid blue;
@@ -181,7 +193,9 @@ button.reset-btn {
     outline: inherit;
 }
 
-/* Theme panel (Theme tab) */
+/* ---------------------------------------------------------------------------
+ * Theme panel (Theme tab): live editing of theme color variables
+ * --------------------------------------------------------------------------- */
 .theme-panel {
     height: 100%;
     box-sizing: border-box;
@@ -292,7 +306,9 @@ button.reset-btn {
     cursor: default;
 }
 
-/* Attributes panel (Attributes tab) */
+/* ---------------------------------------------------------------------------
+ * Attributes panel (Attributes tab): model explorer tree and attribute editor
+ * --------------------------------------------------------------------------- */
 .attrs-tree {
     height: 100%;
     box-sizing: border-box;
