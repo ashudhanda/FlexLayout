@@ -29,7 +29,7 @@ export class Utils {
      * to read model-selection and other options from the URL.
      */
     static getQueryParams() {
-        const a = window.location.search.substr(1);
+        const a = window.location.search.substring(1);
         if (a == "") return {};
         const params = a.split("&");
         const b: any = {};
