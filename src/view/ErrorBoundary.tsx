@@ -13,7 +13,12 @@ export interface IErrorBoundaryState {
     hasError: boolean;
 }
 
-/** @internal */
+/**
+ * React error boundary wrapping tab content. On a render error it shows the configured
+ * `message` with a retry button (retry resets `hasError`, re-mounting the content)
+ * instead of unmounting the whole layout.
+ * @internal
+ */
 export class ErrorBoundary extends React.Component<IErrorBoundaryProps, IErrorBoundaryState> {
     constructor(props: IErrorBoundaryProps) {
         super(props);
