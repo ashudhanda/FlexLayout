@@ -5,7 +5,8 @@ import { LayoutController } from "./layout/LayoutInternal";
 import { ModelLayout } from "../model/ModelLayout";
 import { defaultKeyMap, IKeyMap } from "./layout/LayoutTypes";
 
-/** @internal */
+/** @internal true when the primary input supports hover (fine pointer); gates
+ * hover-only affordances such as tooltips that have no touch equivalent */
 export function isDesktop() {
     const desktop = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     return desktop;
@@ -81,7 +82,8 @@ export function toAriaKeyShortcuts(spec: string | undefined) {
     return spec?.replace(/\bctrl\b/i, "Control"); // the aria-keyshortcuts attribute spells it "Control"
 }
 
-/** @internal */
+/** @internal focus the first focusable element inside `container`, falling back to
+ * the container itself when it has none (containers carry tabindex for this) */
 export function focusFirstIn(container: HTMLElement | null) {
     if (container) {
         const focusable = container.querySelector(
