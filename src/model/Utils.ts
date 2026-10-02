@@ -46,7 +46,12 @@ export function adjustSelectedIndex(parent: TabSetNode | BorderNode | RowNode | 
     }
 }
 
+/**
+ * Generate a random UUID (v4-shaped) via `crypto.getRandomValues`.
+ * Used for internal node ids; not guaranteed to be a strict RFC 4122 UUID.
+ * @internal
+ */
 export function randomUUID(): string {
-    // @ts-expect-error - Fallback for crypto or unknown global environments
+    // @ts-expect-error - crypto may be undeclared in some global typings
     return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) => (c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))).toString(16));
 }
