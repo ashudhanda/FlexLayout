@@ -275,6 +275,7 @@ export const useTabOverflow = (
                     thumb = y - r.y - thumbInternalPos.current;
                 }
 
+                // keep the thumb inside the track before mapping it to a scroll offset
                 thumb = Math.max(0, Math.min(scrollSize - thumbSize, thumb));
                 if (size > 0) {
                     const scrollPos = (thumb * scrollSize) / size;
@@ -285,6 +286,8 @@ export const useTabOverflow = (
         [tabStripRef, miniScrollRef, orientation, getElementSize, getScrollSize, setScrollPosition],
     );
 
+    // no-op stubs: startDrag requires end/cancel callbacks, the mini-scroll thumb
+    // drag needs neither
     const onDragEnd = React.useCallback(() => {}, []);
     const onDragCancel = React.useCallback(() => {}, []);
 
@@ -421,6 +424,7 @@ export const useTabOverflow = (
     return { userControlledPositionRef, onScroll, onScrollPointerDown, hiddenTabs, onMouseWheel, isDockStickyButtons, isShowHiddenTabs };
 };
 
+/** shallow equality for the hidden-tab index arrays; used to skip redundant state updates */
 function arraysEqual(arr1: number[], arr2: number[]) {
     return arr1.length === arr2.length && arr1.every((val, index) => val === arr2[index]);
 }
