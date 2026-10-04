@@ -7,7 +7,12 @@ import { TabNode } from "../model/TabNode";
 import { domId, startDrag } from "./Utils";
 import { Rect } from "../model/Rect";
 
-/** @internal */
+/** @internal
+ * Drives the tab-strip overflow UI for a tabset or border: keeps the list of
+ * hidden tabs (shown in the overflow menu) in sync with measured widths,
+ * positions the mini-scrollbar thumb, translates wheel events into tab scroll
+ * (React wheel listeners are passive, so this needs the raw element ref), and
+ * pins the dock buttons while scrolling. */
 export const useTabOverflow = (
     controller: LayoutController,
     node: TabSetNode | BorderNode,
