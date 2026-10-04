@@ -57,7 +57,10 @@ export interface IKeyEventLike {
     metaKey: boolean;
 }
 
-/** @internal */
+/** @internal
+ * Test a key event against a binding spec like "ctrl+shift+x". Modifier order
+ * is ignored, comparison is case-insensitive, and every modifier must match
+ * exactly (an unlisted modifier held down fails the match). */
 export function matchesKey(event: IKeyEventLike, spec: string | undefined): boolean {
     if (!spec) {
         return false;
