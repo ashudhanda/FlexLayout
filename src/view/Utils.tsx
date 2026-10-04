@@ -11,7 +11,10 @@ export function isDesktop() {
     const desktop = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     return desktop;
 }
-/** @internal */
+/** @internal
+ * Assemble the render state for a tab button: leading (icon), content/title and
+ * buttons. The controller's `customizeTab` hook may override any of them; the
+ * resolved name is pushed back into the node so overflow menus stay in sync. */
 export function getRenderStateEx(controller: LayoutController, tabNode: TabNode, iconAngle?: number) {
     let leadingContent = undefined;
     const titleContent: React.ReactNode = tabNode.getName();
