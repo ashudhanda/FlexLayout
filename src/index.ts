@@ -1,3 +1,8 @@
+/**
+ * FlexLayout public API. View components (Layout, TabLayout, PopupMenu, ...),
+ * layout configuration types, icons and i18n labels live under "./view"; the
+ * immutable model, its actions and geometry helpers under "./model".
+ */
 export * from "./view/Layout";
 export * from "./view/TabLayout";
 export * from "./view/PopupMenu";
