@@ -35,6 +35,9 @@ export const GroupEndMarker = (props: IGroupEndMarkerProps) => {
         borderColor: color,
     };
 
+    // Pointer-only affordance: the marker is decorative (aria-hidden) and keyboard users
+    // toggle the group through the group pill (tabIndex=0, Enter/Space), so the cap
+    // itself must not be focusable.
     return (
         <div
             ref={setSelfRef}
