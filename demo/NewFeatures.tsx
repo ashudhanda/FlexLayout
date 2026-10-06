@@ -12,7 +12,7 @@ export function NewFeatures() {
                 <small>All tab sets in this layout will wrap their tabs onto multiple lines when needed</small>
             </li>
             <li>
-                New border attribute: <b>enableAutoHide</b>, to hide border if it has zero tabs:
+                New border attribute: <b>enableAutoHide</b>, to hide border if it has zero tabs
                 <br />
                 <small>Try moving all tabs from any of the borders</small>
             </li>
@@ -27,16 +27,17 @@ export function NewFeatures() {
                 <small>The &apos;New&apos; tab has an additional settings button</small>
             </li>
             <li>
-                Help text (tooltip) option on tabs: <br />
+                Help text (tooltip) option on tabs
+                <br />
                 <small>Hover over this tab button</small>
             </li>
             <li>
-                Action to close tab set:
+                Action to close tab set
                 <br />
-                <small>See added x button in this tab set</small>
+                <small>See the added x button in this tab set</small>
             </li>
             <li>
-                Tab attributes: borderWidth, borderHeight to allow tabs to have individual sizes in borders:
+                Tab attributes: borderWidth, borderHeight to allow tabs to have individual sizes in borders
                 <br />
                 <small>Try the &apos;With border sizes&apos; tab</small>
             </li>
@@ -46,7 +47,7 @@ export function NewFeatures() {
             </li>
 
             <li>
-                New <b>onContextMenu</b> prop:
+                New <b>onContextMenu</b> prop
                 <br />
                 <small>All tabs and tab sets in this layout have a custom context menu</small>
             </li>
