@@ -8,7 +8,7 @@ export type ILayoutType = "window" | "float" | "tab";
 export interface IJsonModel {
     global?: IGlobalAttributes;
     borders?: IJsonBorderNode[];
-    layout: IJsonRowNode; // top level 'row' is horizontal, rows inside rows take opposite orientation to parent row (ie can act as columns)
+    layout: IJsonRowNode; // top level 'row' is horizontal, rows inside rows take opposite orientation to parent row (i.e. can act as columns)
     subLayouts?: Record<string, IJsonSubLayout>;
 
     /** @deprecated Use `subLayouts` instead. */
