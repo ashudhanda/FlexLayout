@@ -6,6 +6,11 @@ export interface IEdgeIndicatorsProps {
     controller: LayoutController;
 }
 
+/**
+ * @internal the four edge-dock indicators (North/South/East/West) shown around the root row
+ * while a tab is being dragged. They appear only when edge docking is enabled on the model;
+ * each is an aria-hidden hit-test target with a rotated arrow icon.
+ */
 export const EdgeIndicators = ({ controller }: IEdgeIndicatorsProps) => {
     const edges: React.ReactNode[] = [];
     const arrowIcon = controller.getIcons().edgeArrow;
