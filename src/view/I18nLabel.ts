@@ -1,3 +1,12 @@
+/**
+ * The canonical registry of every user-visible string in FlexLayout (tooltips, accessible
+ * names, context menu items, drag images, error messages). Use an enum member everywhere
+ * a string reaches the user instead of hard-coding it.
+ *
+ * To localize the UI, pass the `i18nMapper` prop to the `<Layout>` component: it is called
+ * for each label and can return a translated string (return `undefined` to keep the default).
+ * A trailing "?" in a default string is replaced with the supplied `param` (usually a tab count).
+ */
 export enum I18nLabel {
     /** the close button tooltip on a tab */
     Close_Tab = "Close",
