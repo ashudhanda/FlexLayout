@@ -1,3 +1,14 @@
+/**
+ * The single registry of every CSS class FlexLayout emits. All class names live under the
+ * `flexlayout__` prefix; pass a `classNameMapper` Layout prop to remap any of them.
+ *
+ * Naming conventions:
+ * - members ending in `_` are *prefixes*: code appends a runtime suffix, e.g.
+ *   `FLEXLAYOUT__SPLITTER_ + orientation.getName()` → `flexlayout__splitter_horz`;
+ * - a trailing `-` works the same way for hyphen-suffixed variants, e.g.
+ *   `FLEXLAYOUT__TAB_TOOLBAR_BUTTON_ + "max"` → `flexlayout__tab_toolbar_button-max`;
+ * - `--` values are modifier variants, e.g. `flexlayout__border_button--selected`.
+ */
 export enum CLASSES {
     FLEXLAYOUT__BORDER = "flexlayout__border",
     FLEXLAYOUT__BORDER_ = "flexlayout__border_",
