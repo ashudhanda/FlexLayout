@@ -122,11 +122,7 @@ export class Rect {
 
     /** Inclusive point-in-rect test (edges count as inside). */
     contains(x: number, y: number) {
-        if (this.x <= x && x <= this.getRight() && this.y <= y && y <= this.getBottom()) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.x <= x && x <= this.getRight() && this.y <= y && y <= this.getBottom();
     }
 
     /** Move this rect, in place, so it is centered inside `outerRect`. */
