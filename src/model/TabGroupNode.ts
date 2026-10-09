@@ -37,14 +37,12 @@ export class TabGroupNode extends Node implements IDraggable, IDropTarget {
 
     private static attributeDefinitions: Attributes = TabGroupNode.createAttributeDefinitions();
 
+    // The group's base `rect` (inherited from Node) is set by the layout engine to the drop
+    // region — the union of pill + tabs + end marker — not the pill alone. The pill and end
+    // marker have their own measured rects below, reconciled into `rect` via getDropRegion
+    // after all child rects are current.
     private pillRect: Rect = Rect.empty();
     private endMarkerRect: Rect = Rect.empty();
-
-    /** @internal
-     *  The group's base `rect` (inherited from Node) is set by the layout engine to the *drop
-     *  region* — the union of pill + tabs + end marker — not the pill alone. The pill and end
-     *  marker have their own measured rects (`pillRect`, `endMarkerRect`) which are reconciled
-     *  into `rect` via {@link getDropRegion} after all child rects are current. */
 
     /** @internal */
     constructor(model: Model, json: IJsonTabGroupNode) {
