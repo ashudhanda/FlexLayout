@@ -70,10 +70,17 @@ export class DockLocation {
         DockLocation.values.set(this.name, this);
     }
 
+    /**
+     * The serialized name of this location ("top", "bottom", "left", "right" or "center").
+     * Used as the `location` field in action payloads.
+     */
     getName() {
         return this.name;
     }
 
+    /**
+     * The orientation of the row the model creates when docking at this location.
+     */
     getOrientation() {
         return this.orientation;
     }
