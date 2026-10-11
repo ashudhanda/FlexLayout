@@ -6,6 +6,11 @@ import { IDraggable } from "./IDraggable";
 import { Model } from "./Model";
 import { Node } from "./Node";
 
+/**
+ * The set of border tabsets attached to a model (top/bottom/left/right), keyed by
+ * {@link DockLocation} name. Border tabsets can split the layout or overlay it, and
+ * auto-hide when empty, depending on their `BorderNode` attributes.
+ */
 export class BorderSet {
     /** @internal */
     static fromJson(json: any, model: Model) {
