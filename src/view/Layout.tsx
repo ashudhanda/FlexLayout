@@ -12,6 +12,11 @@ import { DragRectRenderCallback, NodeMouseEvent, ShowOverflowMenuCallback, TabSe
 import { LayoutInternal, LayoutController } from "./layout/LayoutInternal";
 import { ModelLayout } from "../model/ModelLayout";
 
+/**
+ * Props for the top-level {@link Layout} component. `model` drives the rendered
+ * layout; `factory` maps each {@link TabNode} to its React content. All other
+ * props are optional and tune behaviour, appearance and event handling.
+ */
 export interface ILayoutProps {
     /** the model for this layout */
     model: Model;
@@ -96,6 +101,11 @@ export interface ILayoutProps {
     onPopoutClose?: (layout: ModelLayout, popoutWindow: Window, popoutDocument: Document) => void;
 }
 
+/**
+ * Imperative API of the {@link Layout} component, available via ref.
+ * Use it to drive the layout from outside the model (redraw, tab operations,
+ * selections, popouts and float management) after user-level events.
+ */
 export interface ILayoutApi {
     /** re-render the layout */
     redraw(): void;
