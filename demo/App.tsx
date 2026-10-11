@@ -1,3 +1,9 @@
+/**
+ * FlexLayout interactive demo (Vite entry). Builds a rich sample {@link Model} with
+ * tabsets, border panels, tab groups and popouts, renders it via {@link Layout}, and
+ * showcases the component integrations (grids, charts, Monaco, terminal, ...).
+ * Not part of the published library; see ../src for the library source.
+ */
 import * as React from "react";
 import { createRoot } from "react-dom/client";
 import {
