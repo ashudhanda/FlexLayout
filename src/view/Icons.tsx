@@ -19,7 +19,7 @@ export const PinIcon = () => {
     return (
         <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" style={style} viewBox="0 0 24 24" fill="var(--color-icon)">
             <path fill="none" d="M0 0h24v24H0z" />
-            {/* <path d="M16 9V4h1a1 1 0 000-2H7a1 1 0 000 2h1v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1 1-1v-7H19v-2c-1.66 0-3-1.34-3-3z" /> */}
+            {/* rotated 45 degrees so the pin points up-right, like a real thumbtack */}
             <path transform="rotate(45 12 12)" d="M16 9V4h1a1 1 0 000-2H7a1 1 0 000 2h1v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1 1-1v-7H19v-2c-1.66 0-3-1.34-3-3z" />
         </svg>
     );
