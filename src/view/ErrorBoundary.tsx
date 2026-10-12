@@ -49,7 +49,9 @@ export class ErrorBoundary extends React.Component<IErrorBoundaryProps, IErrorBo
                             {this.props.message}
                             {/* explicit tabindex: Safari only tabs to elements with an explicit tabindex */}
                             <p>
-                                <button tabIndex={0} onClick={this.retry}>
+                                {/* type="button": the boundary may be mounted inside a consumer's form; the default
+                                    button type ("submit") would submit it on retry */}
+                                <button type="button" tabIndex={0} onClick={this.retry}>
                                     {this.props.retryText}
                                 </button>
                             </p>
