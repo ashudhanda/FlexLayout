@@ -18,10 +18,12 @@ export class Orientation {
         this._name = name;
     }
 
+    /** The serialized name of this orientation ("horz" or "vert"), used in model JSON. */
     getName() {
         return this._name;
     }
 
+    /** Same as getName(): the serialized name ("horz" or "vert"). */
     toString() {
         return this._name;
     }
