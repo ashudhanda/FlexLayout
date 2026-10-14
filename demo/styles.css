@@ -47,7 +47,6 @@ body {
     bottom: 10px;
     position: absolute;
     display: flex;
-    /* overflow: hidden; */
     background-color: white;
 }
 
@@ -184,7 +183,6 @@ body {
 }
 
 button.reset-btn {
-    /* background: none; */
     color: inherit;
     border: none;
     padding: 0;
