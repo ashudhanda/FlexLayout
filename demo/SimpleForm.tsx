@@ -1,5 +1,10 @@
 import * as React from "react";
 
+/**
+ * Demo tab proving component state survives being moved between hosts: the
+ * ticking counter and the form inputs keep their values when this tab is
+ * popped out into a separate window or dragged into another tabset.
+ */
 export function SimpleForm() {
     const [value, setValue] = React.useState<number>(0);
 
