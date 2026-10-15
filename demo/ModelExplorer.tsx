@@ -3,6 +3,12 @@ import { Action, IJsonModel, Layout, Model, TabNode } from "../src/index";
 import { AttributeEditor } from "./AttributeEditor";
 import { ModelTree } from "./ModelTree";
 
+/**
+ * Demo panel that inspects the live layout model: a tree of every node on the
+ * left and the selected node's editable attributes on the right. Selections
+ * made through the demo's "Show in Explorer" context menu are delivered via
+ * the tab's extra data (`pendingSelectId`), even when this panel is hidden.
+ */
 export function ModelExplorer({ node }: { node: TabNode }) {
     const model = node.getModel();
     // a selection requested by "Show in Explorer" while this panel was not mounted (its tab hidden)
