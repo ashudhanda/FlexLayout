@@ -13,6 +13,8 @@ export function SimpleForm() {
         password: "",
     });
 
+    // ticking counter: the interval keeps running across tab moves, so watching
+    // this number proves component state survives pop-outs and drags
     React.useEffect(() => {
         const timer = setInterval(() => {
             setValue((v) => v + 1);
