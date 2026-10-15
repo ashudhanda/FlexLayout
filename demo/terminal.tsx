@@ -5,6 +5,7 @@ import { SerializeAddon } from "@xterm/addon-serialize";
 import { Actions, ILayoutApi, Model, TabNode } from "../src/index";
 import "@xterm/xterm/css/xterm.css";
 
+/** Props for the demo terminal: a live model getter plus the layout API ref the shell commands act on. */
 interface ITerminalProps {
     getModel: () => Model | null;
     layoutApi: React.RefObject<ILayoutApi | null>;
