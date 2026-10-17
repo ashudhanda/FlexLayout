@@ -101,6 +101,7 @@ export class DockLocation {
         }
     }
 
+    /** Debug form of this dock location: "(DockLocation: name=..., orientation=...)". */
     toString() {
         return "(DockLocation: name=" + this.name + ", orientation=" + this.orientation + ")";
     }
