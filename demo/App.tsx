@@ -788,7 +788,7 @@ function App() {
                         <option value="gray">Gray</option>
                         <option value="aria">Aria</option>
                     </select>
-                    <button className="toolbar_control" style={{ marginLeft: 5 }} title="print layout json to the developer console" onClick={onPrintLayoutClick}>
+                    <button className="toolbar_control" style={{ marginLeft: 5 }} title="Print layout JSON to the developer console" onClick={onPrintLayoutClick}>
                         {"Print"}
                     </button>
                     <button
