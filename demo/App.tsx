@@ -729,10 +729,10 @@ function App() {
                     <button key="reloadbutton" className="toolbar_control " onClick={onReloadFromFile} title="Reload layout from file (Ctrl+Alt+R)" style={{ marginLeft: 5 }}>
                         Reload
                     </button>
-                    <button key="undobutton" title={"undo (" + undoCount + ")"} className="toolbar_control reset-btn" onClick={undo} disabled={!canUndo} style={{ marginLeft: 5 }}>
+                    <button key="undobutton" title={"undo (" + undoCount + ")"} aria-label="Undo" className="toolbar_control reset-btn" onClick={undo} disabled={!canUndo} style={{ marginLeft: 5 }}>
                         <img src="images/undo.svg" alt="" style={{ width: "1.5em", height: "1.5em" }} />
                     </button>
-                    <button key="redobutton" title={"redo (" + redoCount + ")"} className="toolbar_control reset-btn" onClick={redo} disabled={!canRedo} style={{ marginLeft: 5 }}>
+                    <button key="redobutton" title={"redo (" + redoCount + ")"} aria-label="Redo" className="toolbar_control reset-btn" onClick={redo} disabled={!canRedo} style={{ marginLeft: 5 }}>
                         <img src="images/redo.svg" alt="" style={{ width: "1.5em", height: "1.5em" }} />
                     </button>
                     <div style={{ flexGrow: 1 }}></div>
