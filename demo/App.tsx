@@ -749,7 +749,7 @@ function App() {
                         Realtime resize
                         <input name="realtimeResize" type="checkbox" checked={realtimeResize} onChange={onRealtimeResizeChange} />
                     </label>
-                    <label style={{ marginLeft: 10 }} title="Show the structure of the layout, blue for rows, orange for tabsets">
+                    <label style={{ marginLeft: 10 }} title="Show the structure of the layout; blue for rows, orange for tabsets">
                         Structure
                         <input name="show layout" type="checkbox" checked={showLayoutStructure} onChange={onShowLayoutChange} />
                     </label>
