@@ -43,7 +43,12 @@ export const TabContentRenderer = React.memo(({ controller, tabNode }: ITabConte
     );
 }, arePropsEqual);
 
-// only re-render if visible && (fullRedrawRevision or parentRedrawRevision changed)
+/**
+ * Memo comparator for {@link TabContentRenderer}. Re-renders only when the tab is visible
+ * and something that could change its output changed: the window it is shown in, the
+ * layout-wide or parent revision, the node instance (fromJson replaces node instances),
+ * or its sub-layout assignment.
+ */
 function arePropsEqual(prevProps: ITabContentRenderProps, nextProps: ITabContentRenderProps) {
     const reRender =
         nextProps.visible &&
