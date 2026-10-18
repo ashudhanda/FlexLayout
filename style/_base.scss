@@ -1,3 +1,5 @@
+// stretch an element to exactly fill its (positioned) parent: the absolute-positioning
+// primitive used by borders, tab content and overlay layers
 @mixin absoluteFill {
     left: 0;
     top: 0;
@@ -6,6 +8,8 @@
     position: absolute;
 }
 
+// flex item that shrinks to fit its container (basis 0, min sizes 0): the standard fix
+// so long tab strips / content never overflow their flex parent
 @mixin flexFix {
     display: flex;
     flex-basis: 0px;
