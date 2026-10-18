@@ -1,6 +1,12 @@
 import * as React from "react";
 import { ILayoutApi } from "../src/index";
 
+/**
+ * Demo panel for live theme customization. It lists every themeable CSS variable (colors
+ * grouped by category plus sizing metrics), applies overrides as inline custom properties
+ * on the layout root via `layoutApi`, and can print the overrides back out as a CSS
+ * snippet ("printCss") that a consumer can paste into their own stylesheet.
+ */
 interface IThemePanelProps {
     layoutApi: React.RefObject<ILayoutApi | null>;
 }
@@ -91,6 +97,7 @@ const ALL_VARS = [...COLOR_VARS.map((c) => c.varName), ...METRIC_VARS.map((m) =>
 // and is the element whose inline styles are copied into popout windows.
 const toGlobalVar = (varName: string): string => "--flexlayout-" + varName.slice(2);
 
+/** the DOM root of the live layout (where overrides are set), or null before the layout has mounted */
 const getLayoutElement = (layoutApi: React.RefObject<ILayoutApi | null>): HTMLElement | null => layoutApi.current?.getRootDiv() ?? null;
 
 // normalizes any css color (named colors, hex shorthands, rgb()/rgba(), etc.) to its canonical
