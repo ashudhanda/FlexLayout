@@ -785,18 +785,22 @@ export class Model {
         };
     }
 
+    /** The current splitter size in pixels (default 8; overridden via setSplitterSize). */
     getSplitterSize() {
         return this.splitterSize;
     }
 
+    /** Override the splitter size in pixels (pass undefined to fall back to the default). */
     setSplitterSize(size?: number) {
         this.splitterSize = size;
     }
 
+    /** Whether tabs can be docked to the edges of the layout (the `enableEdgeDock` global attribute). */
     isEnableEdgeDock() {
         return this.attributes.enableEdgeDock as boolean;
     }
 
+    /** Whether the edge-dock indicators are shown while dragging (the `enableEdgeDockIndicators` global attribute). */
     isEnableEdgeDockIndicators() {
         return this.attributes.enableEdgeDockIndicators as boolean;
     }
@@ -839,6 +843,7 @@ export class Model {
         }
     }
 
+    /** The model's JSON representation as a string (same as JSON.stringify(this.toJson())). */
     toString() {
         return JSON.stringify(this.toJson());
     }
