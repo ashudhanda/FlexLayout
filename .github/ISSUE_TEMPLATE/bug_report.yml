@@ -62,7 +62,7 @@ body:
     id: os
     attributes:
       label: Operating System
-      description: What opearting system are you using?
+      description: What operating system are you using?
       placeholder: |
         - OS: [e.g. macOS, Windows, Linux]
     validations:
