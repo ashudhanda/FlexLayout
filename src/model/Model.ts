@@ -635,26 +635,27 @@ export class Model {
         return this.layouts.get(layoutId)?.getRootRow();
     }
 
+    /** Whether the root row lays out its children vertically (the `rootOrientationVertical` global attribute; false = horizontal). */
     isRootOrientationVertical() {
         return this.attributes.rootOrientationVertical as boolean;
     }
 
+    /** Whether tab icons rotate with the text in the left and right borders (the `enableRotateBorderIcons` global attribute). */
     isEnableRotateBorderIcons() {
         return this.attributes.enableRotateBorderIcons as boolean;
     }
 
+    /** The reading direction of the left border tabs: "up" (default, text reads bottom to top) or "down" (top to bottom, like the right border). */
     getBorderLeftTabDirection() {
         return this.attributes.borderLeftTabDirection as IBorderTabDirection;
     }
 
+    /** How tab groups are visually indicated: "splitpill" (tabs enclosed in a pill) or "underline" (a colored underline under each grouped tab). */
     getTabGroupType() {
         return this.attributes.tabGroupType as ITabGroupType;
     }
 
-    /**
-     * Gets the
-     * @returns {BorderSet|*}
-     */
+    /** Gets the set of border tabsets (left/right/top/bottom edge borders) of the model. */
     getBorderSet() {
         return this.borders;
     }
