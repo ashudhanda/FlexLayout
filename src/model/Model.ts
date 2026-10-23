@@ -671,6 +671,12 @@ export class Model {
         }
     }
 
+    /**
+     * Visits every node in the layout with the given id, calling fn(node, level) for each.
+     * The main layout also visits the border tabsets. Does nothing if the layout id is unknown.
+     * @param layoutId id of the layout to visit (use Model.MAIN_LAYOUT_ID for the main layout)
+     * @param fn called with each visited node and its depth level
+     */
     visitLayoutNodes(layoutId: string, fn: (node: Node, level: number) => void) {
         if (this.layouts.has(layoutId)) {
             if (layoutId === Model.MAIN_LAYOUT_ID) {
