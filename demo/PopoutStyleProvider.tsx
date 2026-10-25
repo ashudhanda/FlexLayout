@@ -15,6 +15,12 @@ import { StyleSheetManager } from "styled-components";
 //
 // For the main document the default sheets already target the main head, so children pass through.
 
+/**
+ * Props for PopoutStyleProvider.
+ * @param popoutDocument - The document the wrapped content is rendered into (the popout window's
+ * document, or the main document when not popped out).
+ * @param children - Content whose styled-components styles must land in popoutDocument's head.
+ */
 export const PopoutStyleProvider = ({ popoutDocument, children }: { popoutDocument: Document; children: React.ReactNode }) => {
     if (popoutDocument === document) {
         return children;
