@@ -53,6 +53,11 @@ function TerminalComponent(props: ITerminalProps) {
         return findTabs(model).find((tab) => tab.getName() === name);
     };
 
+    // Runs one shell line: splits it into a command (first whitespace-separated word) and the
+    // rest as a single argument string, then dispatches on the command. writeln appends CRLF
+    // because the terminal runs with convertEol but explicit line endings keep output predictable.
+    // Commands that need a model (tabs/close/select/maximize/layout) no-op silently when
+    // getModel() returns null, except close/select which report the missing tab by name.
     const execute = (term: Terminal, line: string) => {
         const writeln = (text: string) => term.write(text + "\r\n");
         const trimmed = line.trim();
