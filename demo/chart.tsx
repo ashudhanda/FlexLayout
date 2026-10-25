@@ -4,6 +4,12 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
+/**
+ * Demo bar chart (Chart.js via react-chartjs-2) showing a single static "Sample Data" dataset
+ * over seven months. Legend toggles update datasetVisibility state so the hidden/shown state
+ * survives the chart rebuild that happens when the tab moves between windows (see the
+ * document-move effect below); animations are disabled so rebuilds render instantly.
+ */
 const BarChart = () => {
     const chartRef = React.useRef<any>(null);
     const containerRef = React.useRef<HTMLDivElement | null>(null);
