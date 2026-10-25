@@ -1,12 +1,19 @@
 import * as React from "react";
 import { BorderNode, TabGroupNode, Model, ModelLayout, Node, RowNode, TabNode, TabSetNode } from "../src/index";
 
+/** One row in the model explorer tree: a node, a layout, or a grouping header. */
 export interface ITreeItem {
+    /** Stable row id: a node/layout id, or a synthetic group id ("global", "borders", "layout", "sublayouts", "sublayout:<id>"). */
     id: string;
+    /** Text shown in the row, from getNodeLabel/getLayoutLabel (or the group name for headers). */
     label: string;
+    /** Whether clicking the row selects it; group headers (Borders, Layout, Sublayouts) are expand-only. */
     selectable: boolean;
+    /** The model node this row represents, if any (absent for group headers and the Global row). */
     node?: Node;
+    /** The sublayout this row represents, if any (only set on "sublayout:<id>" rows). */
     layout?: ModelLayout;
+    /** Child rows, rendered indented one level deeper when the row is expanded. */
     children?: ITreeItem[];
 }
 
