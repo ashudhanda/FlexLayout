@@ -9,7 +9,7 @@ export interface IOverlayProps {
 
 /** @internal */
 export const Overlay = (props: IOverlayProps) => {
-    const { controller: controller, show } = props;
+    const { controller, show } = props;
 
     return (
         <div
@@ -17,7 +17,6 @@ export const Overlay = (props: IOverlayProps) => {
             className={controller.getClassName(CLASSES.FLEXLAYOUT__LAYOUT_OVERLAY)}
             style={{
                 display: show ? "flex" : "none",
-                // display: (show ? "flex" : "none"), backgroundColor: "rgba(0, 0, 0, 0.2)"
             }}
         />
     );
