@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-// demonstrates css-in-js via styled-components; when the tab is popped out, the demo's
+// Demonstrates CSS-in-JS via styled-components. When the tab is popped out, the demo's
 // PopoutStyleProvider wraps the popout content in a StyleSheetManager targeting the popout
-// document so these styles are injected there (the runtime style copy cannot see the CSSOM
-// insertRule calls styled-components uses).
+// document, so these styles are injected there: the runtime style copy cannot see the CSSOM
+// insertRule calls that styled-components uses.
 
 const Box = styled.div`
     background: #1976d2;
