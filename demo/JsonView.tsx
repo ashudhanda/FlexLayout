@@ -2,6 +2,11 @@ import * as React from "react";
 import { Model } from "../src/index";
 import * as Prism from "prismjs";
 
+/**
+ * Demo tab showing the live layout model as syntax-highlighted JSON.
+ * Updates are debounced (see the effect below) so rapid action sequences
+ * highlight only once, after things settle.
+ */
 export function JsonView({ model }: { model: Model }) {
     const timer = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
     const [json, setJson] = React.useState<string>(() => highlightModel(model));
@@ -33,6 +38,7 @@ export function JsonView({ model }: { model: Model }) {
     return <pre style={{ tabSize: "20px" }} dangerouslySetInnerHTML={{ __html: json! }} />;
 }
 
+/** Serialize the model to JSON and highlight it as JavaScript for display. */
 function highlightModel(model: Model) {
     const jsonText = JSON.stringify(model.toJson(), null, "\t");
     return Prism.highlight(jsonText, Prism.languages.javascript, "javascript");
