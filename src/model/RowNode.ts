@@ -63,6 +63,12 @@ export class RowNode extends Node implements IDropTarget {
         model.addNode(this);
     }
 
+    /**
+     * The row's relative size share within its parent row: siblings split the
+     * parent's space in proportion to their weights (default 100, see the
+     * attribute definitions below), so doubling one row's weight roughly
+     * doubles its share. Splitter drags rewrite weights via calculateSplit().
+     */
     getWeight() {
         return this.attributes.weight as number;
     }
