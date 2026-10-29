@@ -4,6 +4,10 @@ import Slider, { SliderProps } from "@mui/material/Slider";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 
+// Demo of MUI dynamic styling: a Slider whose track/thumb switch to the theme's success
+// color when the "Change Style" switch is on. The custom `success` prop is filtered out
+// of the DOM via shouldForwardProp (it is styling-only), and the render counter below
+// shows how often the tab re-renders.
 interface MUIComponent extends SliderProps {
     success?: boolean;
 }
