@@ -27,6 +27,10 @@ export interface IFloatWindowProps {
     onCloseLayout: (layout: ModelLayout) => void;
 }
 
+// Floating-panel resize geometry: handles sit above the panel content (z-index 10) and
+// straddle the panel edge (negative margin) so they stay grabbable at the border; edge
+// handles are 8px wide, corner handles 12px. Panels cannot shrink below 150x25, so a
+// resize can never collapse a panel down to nothing.
 const RESIZE_ZINDEX = 10;
 const RESIZE_MARGIN = -4;
 const RESIZE_EDGE_SIZE = 8;
