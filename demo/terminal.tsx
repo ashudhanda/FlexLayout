@@ -39,6 +39,9 @@ function TerminalComponent(props: ITerminalProps) {
     const historyRef = React.useRef<string[]>([]);
     const historyIndexRef = React.useRef(-1);
 
+    // Walk the whole model tree and collect every tab, in visit order; backs the
+    // `tabs` listing, and `close`/`select` resolve a name through findTabByName below
+    // (exact-name match, first hit wins when names repeat).
     const findTabs = (model: Model) => {
         const tabs: TabNode[] = [];
         model.visitNodes((node) => {
