@@ -21,20 +21,19 @@ export function TabProperties({ node }: { node: TabNode }) {
 
     return (
         <pre className="tab_content" style={{ display: "block", padding: "5px" }}>
-            {"Attributes: " +
-                JSON.stringify(node.toJson(), null, "  ") +
-                "\n\nPath: " +
-                node.getPath() +
-                "\n\nLayoutId: " +
-                node.getLayoutId() +
-                "\n\nWindowId: " +
-                node.getWindowId() +
-                "\n\nClosable: " +
-                node.isCloseable() +
-                "\n\nAllowed in Window: " +
-                node.isAllowedInWindow() +
-                "\n\nRect: " +
-                JSON.stringify(node.getRect(), null, "  ")}
+            {`Attributes: ${JSON.stringify(node.toJson(), null, "  ")}
+
+Path: ${node.getPath()}
+
+LayoutId: ${node.getLayoutId()}
+
+WindowId: ${node.getWindowId()}
+
+Closable: ${node.isCloseable()}
+
+Allowed in Window: ${node.isAllowedInWindow()}
+
+Rect: ${JSON.stringify(node.getRect(), null, "  ")}`}
         </pre>
     );
 }
