@@ -29,15 +29,15 @@ export class Utils {
      * to read model-selection and other options from the URL.
      */
     static getQueryParams() {
-        const a = window.location.search.substring(1);
-        if (a === "") return {};
-        const params = a.split("&");
-        const b: any = {};
-        for (let i = 0; i < params.length; ++i) {
-            const p = params[i].split("=", 2);
-            if (p.length === 1) b[p[0]] = "";
-            else b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+        const query = window.location.search.substring(1);
+        if (query === "") return {};
+        const pairs = query.split("&");
+        const result: any = {};
+        for (let i = 0; i < pairs.length; ++i) {
+            const p = pairs[i].split("=", 2);
+            if (p.length === 1) result[p[0]] = "";
+            else result[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
         }
-        return b;
+        return result;
     }
 }
