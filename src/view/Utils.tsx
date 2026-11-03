@@ -8,8 +8,8 @@ import { defaultKeyMap, IKeyMap } from "./layout/LayoutTypes";
 /** @internal true when the primary input supports hover (fine pointer); gates
  * hover-only affordances such as tooltips that have no touch equivalent */
 export function isDesktop() {
-    const desktop = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    return desktop;
+    // always a real boolean: the old `&&` chain returned undefined when matchMedia was absent
+    return typeof window !== "undefined" && typeof window.matchMedia === "function" && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 }
 /** @internal
  * Assemble the render state for a tab button: leading (icon), content/title and
