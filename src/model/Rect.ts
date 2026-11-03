@@ -108,14 +108,14 @@ export class Rect {
      * positioned and sized exactly over the rect's area.
      */
     positionElement(element: HTMLElement, position?: React.CSSProperties["position"]) {
-        this.styleWithPosition(element.style as any, position);
+        this.styleWithPosition(element.style, position);
     }
 
     /**
-     * Write this rect's bounds into a React style object (clamped to non-negative
-     * sizes) and return it.
+     * Write this rect's bounds into a React style object or a DOM style declaration
+     * (clamped to non-negative sizes) and return it.
      */
-    styleWithPosition(style: React.CSSProperties, position: React.CSSProperties["position"] = "absolute") {
+    styleWithPosition(style: React.CSSProperties | CSSStyleDeclaration, position: React.CSSProperties["position"] = "absolute") {
         style.left = this.x + "px";
         style.top = this.y + "px";
         style.width = Math.max(0, this.width) + "px"; // need Math.max to prevent -ve, cause error in IE
