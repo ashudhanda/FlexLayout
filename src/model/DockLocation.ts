@@ -21,6 +21,11 @@ export class DockLocation {
 
     /** @internal */
     static getLocation(rect: Rect, x: number, y: number, excludeCenter: boolean = false) {
+        // a zero-size (or NaN-size) rect has no edges to dock against: dividing by its
+        // width/height would give NaN and silently fall through to TOP below
+        if (!(rect.width > 0) || !(rect.height > 0)) {
+            return DockLocation.CENTER;
+        }
         x = (x - rect.x) / rect.width;
         y = (y - rect.y) / rect.height;
 
