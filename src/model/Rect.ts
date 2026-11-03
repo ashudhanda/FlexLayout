@@ -33,8 +33,12 @@ export class Rect {
         return { x: this.x, y: this.y, width: this.width, height: this.height };
     }
 
-    /** Round all components to the nearest multiple of `round`, in place. */
+    /** Round all components to the nearest multiple of `round`, in place. A zero
+     * or non-finite `round` is ignored: dividing by it would fill the rect with NaN. */
     snap(round: number) {
+        if (!round || !Number.isFinite(round)) {
+            return;
+        }
         this.x = Math.round(this.x / round) * round;
         this.y = Math.round(this.y / round) * round;
         this.width = Math.round(this.width / round) * round;
