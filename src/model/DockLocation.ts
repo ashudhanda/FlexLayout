@@ -16,7 +16,13 @@ export class DockLocation {
 
     /** @internal */
     static getByName(name: string): DockLocation {
-        return DockLocation.values.get(name)!;
+        // fail loudly on an unknown name (e.g. a bad `location` in model JSON or an action):
+        // returning undefined here only crashed later, far from the bad value
+        const location = DockLocation.values.get(name);
+        if (!location) {
+            throw new Error("Unknown DockLocation: " + name);
+        }
+        return location;
     }
 
     /** @internal */
