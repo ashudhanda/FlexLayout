@@ -23,13 +23,13 @@ export function getRenderStateEx(controller: LayoutController, tabNode: TabNode,
         iconAngle = 0;
     }
 
-    if (leadingContent === undefined && tabNode.getIcon() !== undefined) {
+    if (tabNode.getIcon() !== undefined) {
         // alt is empty since the icon is decorative, the tab name is in the adjacent content
+        const iconStyle: React.CSSProperties = { width: "1em", height: "1em" };
         if (iconAngle !== 0) {
-            leadingContent = <img style={{ width: "1em", height: "1em", transform: "rotate(" + iconAngle + "deg)" }} src={tabNode.getIcon()} alt="" />;
-        } else {
-            leadingContent = <img style={{ width: "1em", height: "1em" }} src={tabNode.getIcon()} alt="" />;
+            iconStyle.transform = "rotate(" + iconAngle + "deg)";
         }
+        leadingContent = <img style={iconStyle} src={tabNode.getIcon()} alt="" />;
     }
 
     const buttons: React.ReactNode[] = [];
