@@ -182,8 +182,6 @@ const Layout = React.forwardRef<ILayoutApi, ILayoutProps>((props, ref) => {
         lastModel.current = props.model;
     }
 
-    Layout.displayName = "Layout"; // name in react dev tools
-
     useImperativeHandle(ref, () => ({
         redraw: () => {
             controllerRef.current?.redrawLayoutAndTabContent();
@@ -219,6 +217,8 @@ const Layout = React.forwardRef<ILayoutApi, ILayoutProps>((props, ref) => {
 
     return <LayoutInternal key={key.current} ref={controllerRef} {...props} parentRedrawRevision={renderMarker} />;
 });
+
+Layout.displayName = "Layout"; // name in react dev tools
 
 export { Layout };
 
