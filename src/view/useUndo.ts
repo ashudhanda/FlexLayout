@@ -127,16 +127,19 @@ export function useUndo(initialModel?: Model | null | (() => Model | null), opti
         }
     }, []);
 
-    const undo = React.useCallback(() => {
+    // swap the current model for the one serialized at the top of `from`, pushing the
+    // current model onto `pushTo` so the step can be reversed (undo pops from the undo
+    // buffer and pushes to redo; redo does the mirror image)
+    const restore = React.useCallback((from: string[], pushTo: string[]) => {
         const current = modelRef.current;
         if (!current) {
             return;
         }
-        const json = undoBuffer.current.pop();
+        const json = from.pop();
         if (json === undefined) {
             return;
         }
-        redoBuffer.current.push(JSON.stringify(current.toJson()));
+        pushTo.push(JSON.stringify(current.toJson()));
         const next = Model.fromJson(JSON.parse(json), current);
         modelRef.current = next;
         setUndoCount(undoBuffer.current.length);
@@ -144,22 +147,13 @@ export function useUndo(initialModel?: Model | null | (() => Model | null), opti
         setModelState(next);
     }, []);
 
+    const undo = React.useCallback(() => {
+        restore(undoBuffer.current, redoBuffer.current);
+    }, [restore]);
+
     const redo = React.useCallback(() => {
-        const current = modelRef.current;
-        if (!current) {
-            return;
-        }
-        const json = redoBuffer.current.pop();
-        if (json === undefined) {
-            return;
-        }
-        undoBuffer.current.push(JSON.stringify(current.toJson()));
-        const next = Model.fromJson(JSON.parse(json), current);
-        modelRef.current = next;
-        setUndoCount(undoBuffer.current.length);
-        setRedoCount(redoBuffer.current.length);
-        setModelState(next);
-    }, []);
+        restore(redoBuffer.current, undoBuffer.current);
+    }, [restore]);
 
     const reset = React.useCallback(() => {
         undoBuffer.current = [];
