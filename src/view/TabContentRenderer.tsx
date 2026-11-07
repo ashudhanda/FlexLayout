@@ -22,8 +22,6 @@ export interface ITabContentRenderProps {
 }
 
 export const TabContentRenderer = React.memo(({ controller, tabNode }: ITabContentRenderProps) => {
-    TabContentRenderer.displayName = "TabContentRenderer"; // name in react dev tools
-
     let content;
     if (tabNode.getComponent()) {
         content = controller.getFactory()(tabNode);
@@ -42,6 +40,8 @@ export const TabContentRenderer = React.memo(({ controller, tabNode }: ITabConte
         </ErrorBoundary>
     );
 }, arePropsEqual);
+
+TabContentRenderer.displayName = "TabContentRenderer"; // name in react dev tools
 
 /**
  * Memo comparator for {@link TabContentRenderer}. Re-renders only when the tab is visible
