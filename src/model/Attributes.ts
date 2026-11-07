@@ -90,7 +90,9 @@ export class Attributes {
 
     toTypescriptInterface(name: string, parentAttributes: Attributes | undefined) {
         const lines = [];
-        const sorted = this.attributes.sort((a, b) => a.name.localeCompare(b.name));
+        // sort a copy: sorting in place would reorder the definitions and change
+        // the key order written by toJson/fromJson after this runs
+        const sorted = [...this.attributes].sort((a, b) => a.name.localeCompare(b.name));
         lines.push("export interface I" + name + "Attributes {");
         for (let i = 0; i < sorted.length; i++) {
             const c = sorted[i];
