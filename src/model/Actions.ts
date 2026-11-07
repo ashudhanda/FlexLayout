@@ -5,13 +5,13 @@ import {
     IJsonRect,
     IJsonRowNode,
     IJsonTabNode,
+    ILayoutType,
     IRowAttributes,
     ISubLayoutAttributes,
     ITabAttributes,
     ITabSetAttributes,
     IBorderAttributes,
 } from "./IJsonModel";
-import { ILayoutType } from "./IJsonModel";
 import { Rect } from "./Rect";
 
 /** Action creators for FlexLayout model mutations. */
