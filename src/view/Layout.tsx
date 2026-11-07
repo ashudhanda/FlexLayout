@@ -210,7 +210,7 @@ const Layout = React.forwardRef<ILayoutApi, ILayoutProps>((props, ref) => {
             }
         },
         getRootDiv: () => {
-            return controllerRef.current!.getRootDiv();
+            return controllerRef.current?.getRootDiv();
         },
     }));
 
