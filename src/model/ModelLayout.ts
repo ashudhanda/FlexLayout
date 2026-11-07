@@ -183,8 +183,9 @@ export class ModelLayout {
     /** @internal */
     toJson(): IJsonSubLayout {
         // chrome sets top,left to large -ve values when minimized, dont save in this case
-        if (this.getType() === "window" && this.getWindow() && this.getWindow()!.screenTop > -10000) {
-            this.setRect(new Rect(this.getWindow()!.screenLeft, this.getWindow()!.screenTop, this.getWindow()!.outerWidth, this.getWindow()!.outerHeight));
+        const win = this.getWindow();
+        if (this.getType() === "window" && win && win.screenTop > -10000) {
+            this.setRect(new Rect(win.screenLeft, win.screenTop, win.outerWidth, win.outerHeight));
         }
 
         const json: IJsonSubLayout = {
