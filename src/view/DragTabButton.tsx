@@ -13,8 +13,6 @@ export interface IDragTabButton {
 
 /** @internal */
 export const DragTabButton = React.memo((props: IDragTabButton) => {
-    DragTabButton.displayName = "DragTabButton"; // name in react dev tools
-
     const { controller, tabNode } = props;
     const selfRef = React.useRef<HTMLDivElement | null>(null);
 
@@ -32,6 +30,8 @@ export const DragTabButton = React.memo((props: IDragTabButton) => {
         </div>
     );
 }, arePropsEqual);
+
+DragTabButton.displayName = "DragTabButton"; // name in react dev tools
 
 // Freeze the stamp while a drag is in progress: returning `dragging` skips
 // re-renders only while dragging is true, so the preview under the cursor
