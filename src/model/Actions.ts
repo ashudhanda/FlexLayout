@@ -112,7 +112,7 @@ export class Actions {
     }
 
     /**
-     * Deletes a tabset node and all it's child tab nodes from the layout
+     * Deletes a tabset node and all its child tab nodes from the layout
      * @param tabsetNodeId the id of the tabset node to delete
      * @returns {Action} the action
      */
@@ -121,9 +121,9 @@ export class Actions {
     }
 
     /**
-     * Change the given nodes tab text
+     * Change the given node's tab text
      * @param tabNodeId the id of the tab node to rename
-     * @param text the test of the tab
+     * @param text the text of the tab
      * @returns {Action} the action
      */
     static renameTab(tabNodeId: string, text: string): Action {
@@ -174,7 +174,7 @@ export class Actions {
 
     /**
      * Adjust the weights of a row, used when the splitter is moved
-     * @param nodeId the id of the row node whose childrens weights are being adjusted
+     * @param nodeId the id of the row node whose children's weights are being adjusted
      * @param weights an array of weights to be applied to the children
      * @returns {Action} the action
      */
@@ -202,7 +202,7 @@ export class Actions {
     }
 
     /**
-     * Updates the global model jsone attributes
+     * Updates the global model json attributes
      * @param attributes the json for the model attributes to update (merge into the existing attributes)
      * @returns {Action} the action
      */
