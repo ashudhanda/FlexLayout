@@ -196,6 +196,7 @@ export class Attribute {
 
     setDescription(value: string) {
         this.description = value;
+        return this;
     }
 
     /** @internal */
