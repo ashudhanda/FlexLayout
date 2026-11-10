@@ -46,7 +46,7 @@ export const GroupPill = (props: IGroupPillProps) => {
 
     const toggleOpen = () => {
         // click/Enter/Space toggles the group open/closed (Chrome style collapse/expand)
-        controller.doAction(Actions.updateNodeAttributes(groupNode.getId(), { opened: !groupNode.isOpened() } as any));
+        controller.doAction(Actions.updateNodeAttributes(groupNode.getId(), { opened: !groupNode.isOpened() }));
     };
 
     const onClick = (event: React.MouseEvent<HTMLElement>) => {
