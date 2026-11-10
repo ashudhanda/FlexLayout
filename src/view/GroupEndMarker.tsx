@@ -25,7 +25,7 @@ export const GroupEndMarker = (props: IGroupEndMarkerProps) => {
     );
 
     const onClick = (event: React.MouseEvent<HTMLElement>) => {
-        controller.doAction(Actions.updateNodeAttributes(groupNode.getId(), { opened: !groupNode.isOpened() } as any));
+        controller.doAction(Actions.updateNodeAttributes(groupNode.getId(), { opened: !groupNode.isOpened() }));
         event.stopPropagation();
     };
 
