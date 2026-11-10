@@ -348,10 +348,6 @@ export class DragDropManager {
                     dropInfo.rect.positionElement(this._outlineDiv);
                     this._outlineDiv.style.visibility = "visible";
                 }
-                // } else {
-                //     if (this._outlineDiv) {
-                //         this._outlineDiv.style.visibility = "hidden";
-                //     }
             }
         }
     };
