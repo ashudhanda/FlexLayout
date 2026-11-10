@@ -183,7 +183,6 @@ export abstract class Node {
 
     /** @internal */
     fireEvent(event: NodeEventType, params: any) {
-        // console.log(this._type, " fireEvent " + event + " " + JSON.stringify(params));
         if (this.listeners.has(event)) {
             this.listeners.get(event)!(params);
         }
@@ -200,7 +199,6 @@ export abstract class Node {
             }
         }
 
-        // console.log(name + "=" + val);
         return val;
     }
 
