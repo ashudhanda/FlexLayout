@@ -7,6 +7,8 @@ import { IDraggable } from "./IDraggable";
 import { IJsonBorderNode, IJsonTabGroupNode, IJsonRowNode, IJsonTabNode, IJsonTabSetNode } from "./IJsonModel";
 import { Model } from "./Model";
 import { ModelLayout } from "./ModelLayout";
+import type { TabNode } from "./TabNode";
+import type { TabSetNode } from "./TabSetNode";
 
 export abstract class Node {
     /** @internal */
@@ -307,13 +309,13 @@ export abstract class Node {
             }
 
             // prevent tabset with enableClose set to false docking into another tabset
-            if (dropInfo.location === DockLocation.CENTER && dragNode.getType() === "tabset" && (dragNode as any).isEnableClose() === false) {
+            if (dropInfo.location === DockLocation.CENTER && dragNode.getType() === "tabset" && (dragNode as TabSetNode).isEnableClose() === false) {
                 return false;
             }
 
             // a pinned tab may only be reordered within its own tabset's tabstrip
             // (the parent check allows external drags of tabs with pinned in their json)
-            if (dragNode.getType() === "tab" && (dragNode as any).isPinned() === true && dragNode.getParent() !== undefined) {
+            if (dragNode.getType() === "tab" && (dragNode as TabNode).isPinned() === true && dragNode.getParent() !== undefined) {
                 if (dropInfo.node !== dragNode.getParent() || dropInfo.location !== DockLocation.CENTER) {
                     return false;
                 }
@@ -380,7 +382,7 @@ export type NodeEventType = "save" | "resize" | "visibility" | "close";
 /** @internal */
 function containsPinnedTab(node: Node): boolean {
     if (node.getType() === "tab") {
-        return (node as any).isPinned() === true;
+        return (node as TabNode).isPinned() === true;
     }
     return node.getChildren().some(containsPinnedTab);
 }
