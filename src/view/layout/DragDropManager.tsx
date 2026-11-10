@@ -88,15 +88,7 @@ export class DragDropManager {
             }
         }, 0);
         const content = this._controller.i18nName(I18nLabel.Dock_Float_Tabs).replace("?", String(tabCount));
-        let rendered = false;
-        if (this._controller.getProps().onRenderDragRect) {
-            const dragComponent = this._controller.getProps().onRenderDragRect!(content, rowNode, undefined);
-            if (dragComponent) {
-                this.setDragComponent(event, dragComponent, 10, 10);
-                rendered = true;
-            }
-        }
-        if (!rendered) {
+        if (!this.renderDragPreview(event, content, rowNode, 10, 10)) {
             this.setDragComponent(event, content, 10, 10);
         }
     }
@@ -112,33 +104,17 @@ export class DragDropManager {
         this._controller.getModel().sortLayouts(); // must have order windows, tabs, floats
 
         if (node instanceof TabSetNode) {
-            let rendered = false;
             let content = this._controller.i18nName(I18nLabel.Move_Tabset);
             if (node.getChildren().length > 0) {
                 content = this._controller.i18nName(I18nLabel.Move_Tabs).replace("?", String(node.getChildren().length));
             }
-            if (this._controller.getProps().onRenderDragRect) {
-                const dragComponent = this._controller.getProps().onRenderDragRect!(content, node, undefined);
-                if (dragComponent) {
-                    this.setDragComponent(event, dragComponent, 10, 10);
-                    rendered = true;
-                }
-            }
-            if (!rendered) {
+            if (!this.renderDragPreview(event, content, node, 10, 10)) {
                 this.setDragComponent(event, content, 10, 10);
             }
         } else if (node instanceof TabGroupNode) {
             // dragging a group pill moves the whole group (like dragging a tabset)
-            let rendered = false;
             const content = this._controller.i18nName(I18nLabel.Move_Group).replace("?", String(node.getChildren().length));
-            if (this._controller.getProps().onRenderDragRect) {
-                const dragComponent = this._controller.getProps().onRenderDragRect!(content, node, undefined);
-                if (dragComponent) {
-                    this.setDragComponent(event, dragComponent, 10, 10);
-                    rendered = true;
-                }
-            }
-            if (!rendered) {
+            if (!this.renderDragPreview(event, content, node, 10, 10)) {
                 this.setDragComponent(event, content, 10, 10);
             }
         } else {
@@ -153,16 +129,8 @@ export class DragDropManager {
                 const x = isInVerticalBorder ? 10 : offsetX;
                 const y = isInVerticalBorder ? 10 : offsetY;
 
-                let rendered = false;
-                if (this._controller.getProps().onRenderDragRect) {
-                    const content = <TabButtonStamp key={node.getId()} controller={this._controller} tabNode={node as TabNode} />;
-                    const dragComponent = this._controller.getProps().onRenderDragRect!(content, node, undefined);
-                    if (dragComponent) {
-                        this.setDragComponent(event, dragComponent, x, y);
-                        rendered = true;
-                    }
-                }
-                if (!rendered) {
+                const content = <TabButtonStamp key={node.getId()} controller={this._controller} tabNode={node as TabNode} />;
+                if (!this.renderDragPreview(event, content, node, x, y)) {
                     if (isSafari()) {
                         this.setDragComponent(event, <TabButtonStamp tabNode={node as TabNode} controller={this._controller} />, x, y);
                     } else {
@@ -172,6 +140,19 @@ export class DragDropManager {
             }
         }
     };
+
+    // tries the onRenderDragRect callback for a custom drag image; returns true when the
+    // callback supplied one, false when the caller should fall back to the plain content
+    private renderDragPreview(event: DragEvent, content: React.ReactNode, node: Node & IDraggable, x: number, y: number): boolean {
+        if (this._controller.getProps().onRenderDragRect) {
+            const dragComponent = this._controller.getProps().onRenderDragRect!(content, node, undefined);
+            if (dragComponent) {
+                this.setDragComponent(event, dragComponent, x, y);
+                return true;
+            }
+        }
+        return false;
+    }
 
     setDragComponent(event: DragEvent, component: React.ReactNode, x: number, y: number) {
         const dragElement = (
