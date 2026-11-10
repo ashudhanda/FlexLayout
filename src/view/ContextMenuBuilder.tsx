@@ -328,7 +328,7 @@ function performAction(action: NodeContextAction, node: Node, dispatch: (action:
             break;
         case "toggleOpen": {
             const group = node as TabGroupNode;
-            dispatch(Actions.updateNodeAttributes(group.getId(), { opened: !group.isOpened() } as any));
+            dispatch(Actions.updateNodeAttributes(group.getId(), { opened: !group.isOpened() }));
             break;
         }
     }
@@ -423,7 +423,7 @@ function getGroupPickerItem(tab: TabNode, options: INodeContextMenuOptions): IPo
 function getGroupRenameItem(group: TabGroupNode, options: INodeContextMenuOptions): IPopupMenuItem {
     const dispatch = options.onAction ?? ((action: Action) => group.getModel().doAction(action));
     const commit = (value: string) => {
-        dispatch(Actions.updateNodeAttributes(group.getId(), { name: value } as any));
+        dispatch(Actions.updateNodeAttributes(group.getId(), { name: value }));
         options.closeMenu?.();
     };
     const content = (
@@ -467,7 +467,7 @@ function getGroupRenameItem(group: TabGroupNode, options: INodeContextMenuOption
 function getGroupColorItem(group: TabGroupNode, options: INodeContextMenuOptions): IPopupMenuItem {
     const dispatch = options.onAction ?? ((action: Action) => group.getModel().doAction(action));
     const pick = (color: string) => {
-        dispatch(Actions.updateNodeAttributes(group.getId(), { color } as any));
+        dispatch(Actions.updateNodeAttributes(group.getId(), { color }));
     };
     const palette = getGroupColorPalette(group);
     const content = (
