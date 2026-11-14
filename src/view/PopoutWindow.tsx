@@ -144,13 +144,17 @@ export const PopoutWindow = (props: React.PropsWithChildren<IPopoutWindowProps>)
         }
         return () => {
             window.removeEventListener("beforeunload", onMainWindowBeforeUnload);
+            // clear the style-poll interval before closing the window (the beforeunload
+            // handler does the same when the user closes the popout; without this the
+            // timer is only stopped as a side effect of the window going away)
+            if (pollTimerRef.current != null) {
+                popoutWindow.current?.clearInterval(pollTimerRef.current);
+                pollTimerRef.current = null;
+            }
             popoutWindow.current?.close();
             popoutWindow.current = null;
             observerRef.current?.disconnect();
             observerRef.current = null;
-            if (pollTimerRef.current != null) {
-                pollTimerRef.current = null;
-            }
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
