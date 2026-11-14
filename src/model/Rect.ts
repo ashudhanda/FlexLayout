@@ -155,13 +155,9 @@ export class Rect {
         if (this.getBottom() > outerRect.getBottom()) {
             this.y = outerRect.getBottom() - this.height;
         }
-
-        if (this.x < outerRect.x) {
-            this.x = outerRect.x;
-        }
-        if (this.y < outerRect.y) {
-            this.y = outerRect.y;
-        }
+        // no second x/y clamp is needed here: width/height were already clamped to the outer
+        // size above, so pulling the right/bottom edge back in cannot push x/y below the
+        // outer origin (x >= outer.x whenever width <= outer.width, likewise y)
     }
 
     toString() {
