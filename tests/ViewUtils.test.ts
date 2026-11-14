@@ -1,12 +1,32 @@
 // @vitest-environment node
 import { Actions, IJsonModel, Model, TabNode } from "../src";
 import { ModelLayout } from "../src/model/ModelLayout";
-import { canDockToLayout, domId, findParentLayout, hasModifier, IKeyEventLike } from "../src/view/Utils";
+import { canDockToLayout, domId, findParentLayout, hasModifier, IKeyEventLike, toAriaKeyShortcuts } from "../src/view/Utils";
 
 describe("domId", () => {
     it("replaces whitespace so the id is usable as an aria reference", () => {
         expect(domId("flexlayout-tab-", "My Tab")).equal("flexlayout-tab-My_Tab");
         expect(domId("prefix-", "no-space")).equal("prefix-no-space");
+    });
+});
+
+describe("toAriaKeyShortcuts", () => {
+    it("capitalizes every modifier to its aria-keyshortcuts token", () => {
+        expect(toAriaKeyShortcuts("ctrl+x")).equal("Control+x");
+        expect(toAriaKeyShortcuts("shift+x")).equal("Shift+x");
+        expect(toAriaKeyShortcuts("alt+x")).equal("Alt+x");
+        expect(toAriaKeyShortcuts("meta+x")).equal("Meta+x");
+        expect(toAriaKeyShortcuts("ctrl+shift+alt+meta+x")).equal("Control+Shift+Alt+Meta+x");
+    });
+
+    it("is case-insensitive on the modifiers and leaves the key alone", () => {
+        expect(toAriaKeyShortcuts("CTRL+X")).equal("Control+X");
+        expect(toAriaKeyShortcuts("ctrl+ArrowLeft")).equal("Control+ArrowLeft");
+    });
+
+    it("passes through specs without modifiers and undefined", () => {
+        expect(toAriaKeyShortcuts("F2")).equal("F2");
+        expect(toAriaKeyShortcuts(undefined)).equal(undefined);
     });
 });
 
