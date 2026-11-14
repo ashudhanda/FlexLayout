@@ -26,7 +26,7 @@ export function adjustSelectedIndex(parent: TabSetNode | BorderNode | RowNode | 
         return;
     }
     if (parent instanceof TabSetNode || parent instanceof BorderNode) {
-        const selectedIndex = (parent as TabSetNode | BorderNode).getSelected();
+        const selectedIndex = parent.getSelected();
         if (selectedIndex !== -1) {
             if (removedIndex === selectedIndex && parent.getChildren().length > 0) {
                 if (removedIndex >= parent.getChildren().length) {
