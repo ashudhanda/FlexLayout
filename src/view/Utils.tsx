@@ -83,9 +83,26 @@ export function resolveKeyMap(keyMap: IKeyMap | undefined): IKeyMap {
     return { ...defaultKeyMap, ...keyMap };
 }
 
-/** @internal */
+/** @internal
+ * Convert a keymap binding spec like "ctrl+shift+x" to its `aria-keyshortcuts` form.
+ * The attribute spells modifiers "Control", "Shift", "Alt" and "Meta" (lowercase "ctrl",
+ * "shift", "alt" or "meta" are not valid tokens and are ignored by assistive technology);
+ * the key itself is left as written. */
 export function toAriaKeyShortcuts(spec: string | undefined) {
-    return spec?.replace(/\bctrl\b/i, "Control"); // the aria-keyshortcuts attribute spells it "Control"
+    if (!spec) {
+        return spec;
+    }
+    return spec
+        .split("+")
+        .map((part) => {
+            const lower = part.toLowerCase();
+            if (lower === "ctrl") return "Control";
+            if (lower === "shift") return "Shift";
+            if (lower === "alt") return "Alt";
+            if (lower === "meta") return "Meta";
+            return part;
+        })
+        .join("+");
 }
 
 /** @internal focus the first focusable element inside `container`, falling back to
