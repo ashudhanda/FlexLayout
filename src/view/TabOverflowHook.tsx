@@ -7,6 +7,38 @@ import { TabNode } from "../model/TabNode";
 import { domId, startDrag } from "./Utils";
 import { Rect } from "../model/Rect";
 
+/** @internal minimum mini-scrollbar thumb size (px); the thumb never shrinks below this */
+export const MINI_SCROLL_THUMB_MIN_SIZE = 20;
+
+/** @internal displayed mini-scrollbar thumb size for a strip of `size` with `scrollSize` of content */
+export function miniScrollThumbSize(size: number, scrollSize: number): number {
+    if (scrollSize <= 0) {
+        return 0;
+    }
+    return Math.max(MINI_SCROLL_THUMB_MIN_SIZE, (size * size) / scrollSize);
+}
+
+/** @internal thumb offset (px from the track start) for a scroll `position`; the inverse of {@link thumbToScrollPosition} */
+export function scrollPositionToThumb(position: number, size: number, scrollSize: number): number {
+    const thumbSize = miniScrollThumbSize(size, scrollSize);
+    const range = scrollSize - size;
+    if (range <= 0 || size - thumbSize <= 0) {
+        return 0;
+    }
+    return (position * (size - thumbSize)) / range;
+}
+
+/** @internal scroll position for a thumb offset (px from the track start); clamps the thumb to the track first */
+export function thumbToScrollPosition(thumb: number, size: number, scrollSize: number): number {
+    const thumbSize = miniScrollThumbSize(size, scrollSize);
+    const track = size - thumbSize;
+    if (track <= 0) {
+        return 0;
+    }
+    const clamped = Math.max(0, Math.min(track, thumb));
+    return (clamped * (scrollSize - size)) / track;
+}
+
 /** @internal
  * Drives the tab-strip overflow UI for a tabset or border: keeps the list of
  * hidden tabs (shown in the overflow menu) in sync with measured widths,
@@ -157,13 +189,8 @@ export const useTabOverflow = (
             const position = getScrollPosition(t);
 
             if (scrollSize > size && scrollSize > 0) {
-                let thumbSize = (size * size) / scrollSize;
-                let adjust = 0;
-                if (thumbSize < 20) {
-                    adjust = 20 - thumbSize;
-                    thumbSize = 20;
-                }
-                const thumbPos = (position * (size - adjust)) / scrollSize;
+                const thumbSize = miniScrollThumbSize(size, scrollSize);
+                const thumbPos = scrollPositionToThumb(position, size, scrollSize);
                 if (orientation === Orientation.HORZ) {
                     s.style.width = thumbSize + "px";
                     s.style.left = thumbPos + "px";
@@ -267,10 +294,8 @@ export const useTabOverflow = (
         (x: number, y: number) => {
             if (tabStripRef.current && miniScrollRef.current) {
                 const t = tabStripRef.current;
-                const s = miniScrollRef.current;
                 const size = getElementSize(t);
                 const scrollSize = getScrollSize(t);
-                const thumbSize = getElementSize(s);
 
                 const r = t.getBoundingClientRect()!;
                 let thumb: number;
@@ -280,12 +305,12 @@ export const useTabOverflow = (
                     thumb = y - r.y - thumbInternalPos.current;
                 }
 
-                // keep the thumb inside the track before mapping it to a scroll offset
-                thumb = Math.max(0, Math.min(scrollSize - thumbSize, thumb));
-                if (size > 0) {
-                    const scrollPos = (thumb * scrollSize) / size;
-                    setScrollPosition(scrollPos);
-                }
+                // the thumb is clamped to the track and mapped with the inverse of the
+                // thumb-position math in updateScrollMetrics, so dragging it to the end of
+                // the track reaches the end of the content (the old code clamped to
+                // scrollSize - thumbSize and scaled by scrollSize / size, which stopped
+                // short of the last scrollSize - size px of content)
+                setScrollPosition(thumbToScrollPosition(thumb, size, scrollSize));
             }
         },
         [tabStripRef, miniScrollRef, orientation, getElementSize, getScrollSize, setScrollPosition],
