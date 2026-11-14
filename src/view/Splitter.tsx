@@ -176,7 +176,7 @@ export const Splitter = (props: ISplitterProps) => {
                 }
 
                 if (node instanceof BorderNode) {
-                    const pos = (node as BorderNode).calculateSplit(node, value);
+                    const pos = node.calculateSplit(node, value);
                     controller.doAction(Actions.adjustBorderSplit(node.getId(), pos).setAdjusting(adjusting));
                 } else {
                     const init = initialSizes.current;
@@ -195,7 +195,7 @@ export const Splitter = (props: ISplitterProps) => {
     };
 
     const getBoundPosition = (p: number) => {
-        const bounds = pBounds.current as number[];
+        const bounds = pBounds.current;
         let rtn = p;
         if (p < bounds[0]) {
             rtn = bounds[0];
@@ -208,7 +208,7 @@ export const Splitter = (props: ISplitterProps) => {
     };
 
     const cm = controller.getClassName;
-    const style: React.CSSProperties & { [key: string]: any } = {
+    const style: React.CSSProperties & { "--splitter-active-size"?: string } = {
         cursor: horizontal ? "ew-resize" : "ns-resize",
         flexDirection: horizontal ? "column" : "row",
     };
