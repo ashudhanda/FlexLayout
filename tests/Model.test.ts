@@ -821,8 +821,8 @@ describe("Tree", function () {
                     expect(Number.isFinite(bounds[0])).equal(true);
                     expect(bounds[0]).toBeLessThanOrEqual(bounds[1]);
 
-                    const sizeAtMin = border.calculateSplit(border, bounds[0]);
-                    const sizeAtMax = border.calculateSplit(border, bounds[1]);
+                    const sizeAtMin = border.calculateSplit(bounds[0]);
+                    const sizeAtMax = border.calculateSplit(bounds[1]);
                     expect(Number.isFinite(sizeAtMin)).equal(true);
                     expect(Number.isFinite(sizeAtMax)).equal(true);
                     expect(sizeAtMin).toBeGreaterThanOrEqual(0);
