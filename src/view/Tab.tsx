@@ -116,6 +116,12 @@ export const Tab = (props: ITabProps) => {
 
     let overlay = null;
 
+    // NOTE: this deliberately reads the *main* document's visibility, not the tab panel's
+    // ownerDocument: the overlay grays out a popped-out tab when the main window is
+    // backgrounded (see the enablePopoutOverlay description on TabNode), and the popout's
+    // own document is visible whenever the popout itself is on screen, so checking it
+    // here would never show the overlay. The main layout's visibilitychange listener
+    // (LayoutInternal) redraws all layouts when this flips.
     if (selected && document.hidden && tabNode.isEnablePopoutOverlay()) {
         const overlayStyle: React.CSSProperties = {};
         parentNode.getContentRect().styleWithPosition(overlayStyle);
