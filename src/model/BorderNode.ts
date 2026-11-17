@@ -420,8 +420,8 @@ export class BorderNode extends Node implements IDropTarget {
         return pBounds;
     }
 
-    /** @internal */
-    calculateSplit(splitter: BorderNode, splitterPos: number) {
+    /** @internal the border size for a splitter at `splitterPos` (clamped to >= 0) */
+    calculateSplit(splitterPos: number) {
         const pBounds = this.getSplitterBounds();
         if (this.location === DockLocation.BOTTOM || this.location === DockLocation.RIGHT) {
             return Math.max(0, pBounds[1] - splitterPos);
