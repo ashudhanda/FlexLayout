@@ -551,7 +551,7 @@ export const TabSet = (props: ITabSetProps) => {
                                 onScroll={onScroll}
                             >
                                 <div
-                                    style={{ width: isTabStretch ? "100%" : "none" }}
+                                    style={{ width: isTabStretch ? "100%" : "auto" }}
                                     role={tablistRole}
                                     aria-orientation={editingHere ? undefined : "horizontal"}
                                     aria-label={editingHere ? undefined : tabsetNode.getName()}
