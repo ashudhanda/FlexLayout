@@ -42,11 +42,11 @@ export class TabSetNode extends Node implements IDraggable, IDropTarget {
             newLayoutNode.setSelected(newLayoutNode.getTabNodes().length - 1);
         }
 
-        if (json.maximized && json.maximized === true) {
+        if (json.maximized === true) {
             layout.setMaximizedTabSet(newLayoutNode);
         }
 
-        if (json.active && json.active === true) {
+        if (json.active === true) {
             layout.setActiveTabSet(newLayoutNode);
         }
 
