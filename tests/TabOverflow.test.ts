@@ -1,5 +1,6 @@
 // @vitest-environment node
-import { miniScrollThumbSize, scrollPositionToThumb, thumbToScrollPosition } from "../src/view/TabOverflowHook";
+import { miniScrollThumbSize, scrollPositionToThumb, thumbToScrollPosition, wheelScrollDelta } from "../src/view/TabOverflowHook";
+import { Orientation } from "../src/model/Orientation";
 
 describe("miniScrollThumbSize", () => {
     it("scales with the visible fraction of the content", () => {
@@ -54,5 +55,36 @@ describe("scrollPositionToThumb / thumbToScrollPosition", () => {
         expect(scrollPositionToThumb(0, 100, 100)).equal(0);
         expect(thumbToScrollPosition(10, 100, 100)).equal(0);
         expect(scrollPositionToThumb(0, 100, 50)).equal(0);
+    });
+});
+
+describe("wheelScrollDelta", () => {
+    it("uses deltaX on a horizontal strip (trackpad / shift+wheel)", () => {
+        expect(wheelScrollDelta({ deltaX: 120, deltaY: 0, deltaMode: 0 }, Orientation.HORZ, 500)).equal(120);
+        expect(wheelScrollDelta({ deltaX: -50, deltaY: 0, deltaMode: 0 }, Orientation.HORZ, 500)).equal(-50);
+    });
+
+    it("falls back to deltaY on a horizontal strip when there is no deltaX", () => {
+        expect(wheelScrollDelta({ deltaX: 0, deltaY: 120, deltaMode: 0 }, Orientation.HORZ, 500)).equal(120);
+    });
+
+    it("prefers the on-axis component when both are present", () => {
+        expect(wheelScrollDelta({ deltaX: 60, deltaY: 120, deltaMode: 0 }, Orientation.HORZ, 500)).equal(60);
+        expect(wheelScrollDelta({ deltaX: 120, deltaY: 60, deltaMode: 0 }, Orientation.VERT, 500)).equal(60);
+    });
+
+    it("uses deltaY on a vertical strip, falling back to deltaX", () => {
+        expect(wheelScrollDelta({ deltaX: 0, deltaY: 120, deltaMode: 0 }, Orientation.VERT, 500)).equal(120);
+        expect(wheelScrollDelta({ deltaX: 120, deltaY: 0, deltaMode: 0 }, Orientation.VERT, 500)).equal(120);
+    });
+
+    it("scales line-mode deltas by 40px and page-mode deltas by the strip size", () => {
+        expect(wheelScrollDelta({ deltaX: 3, deltaY: 0, deltaMode: 1 }, Orientation.HORZ, 500)).equal(120);
+        expect(wheelScrollDelta({ deltaX: 1, deltaY: 0, deltaMode: 2 }, Orientation.HORZ, 500)).equal(500);
+        expect(wheelScrollDelta({ deltaX: 0, deltaY: 2, deltaMode: 1 }, Orientation.VERT, 500)).equal(80);
+    });
+
+    it("is 0 when there is no wheel movement", () => {
+        expect(wheelScrollDelta({ deltaX: 0, deltaY: 0, deltaMode: 0 }, Orientation.HORZ, 500)).equal(0);
     });
 });
