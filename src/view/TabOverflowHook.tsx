@@ -39,6 +39,24 @@ export function thumbToScrollPosition(thumb: number, size: number, scrollSize: n
     return (clamped * (scrollSize - size)) / track;
 }
 
+/** @internal scroll distance (px, signed) for a wheel event on a strip scrolling along
+ * `orientation`: the wheel component on the strip's axis wins (trackpads and shift+wheel
+ * report horizontal scrolls as deltaX), falling back to the other axis so a vertical
+ * wheel still scrolls a horizontal strip. Line-mode deltas scale by 40px/line and
+ * page-mode deltas by the visible strip `size`. */
+export function wheelScrollDelta(event: { deltaX: number; deltaY: number; deltaMode: number }, orientation: Orientation, size: number): number {
+    const primary = orientation === Orientation.HORZ ? event.deltaX : event.deltaY;
+    const secondary = orientation === Orientation.HORZ ? event.deltaY : event.deltaX;
+    const raw = primary !== 0 ? primary : secondary;
+    if (event.deltaMode === 1) {
+        return raw * 40; // DOM_DELTA_LINE: deltas are in lines
+    }
+    if (event.deltaMode === 2) {
+        return raw * size; // DOM_DELTA_PAGE: deltas are in pages
+    }
+    return raw;
+}
+
 /** @internal
  * Drives the tab-strip overflow UI for a tabset or border: keeps the list of
  * hidden tabs (shown in the overflow menu) in sync with measured widths,
@@ -341,14 +359,12 @@ export const useTabOverflow = (
             if (tabStripRef.current) {
                 if (node.getChildren().length === 0) return;
 
-                let delta: number;
-                if (Math.abs(event.deltaY) > 0) {
-                    delta = -event.deltaY;
-                    if (event.deltaMode === 1) {
-                        // DOM_DELTA_LINE	0x01	The delta values are specified in lines.
-                        delta *= 40;
-                    }
-                    const newPos = getScrollPosition(tabStripRef.current) - delta;
+                // horizontal wheel gestures (trackpad swipe, shift+wheel) used to be ignored
+                // entirely while the strip still swallowed the event via the non-passive
+                // wheel listener below, so the gesture scrolled nothing anywhere
+                const delta = wheelScrollDelta(event, orientation, getElementSize(tabStripRef.current));
+                if (delta !== 0) {
+                    const newPos = getScrollPosition(tabStripRef.current) + delta;
                     const maxScroll = getScrollSize(tabStripRef.current) - getElementSize(tabStripRef.current);
                     const p = Math.max(0, Math.min(maxScroll, newPos));
                     setScrollPosition(p);
@@ -356,7 +372,7 @@ export const useTabOverflow = (
                 }
             }
         },
-        [node, tabStripRef, getScrollPosition, getScrollSize, getElementSize, setScrollPosition],
+        [node, orientation, tabStripRef, getScrollPosition, getScrollSize, getElementSize, setScrollPosition],
     );
 
     const onWheel = React.useCallback((event: Event) => {
