@@ -176,7 +176,7 @@ export const Splitter = (props: ISplitterProps) => {
                 }
 
                 if (node instanceof BorderNode) {
-                    const pos = node.calculateSplit(node, value);
+                    const pos = node.calculateSplit(value);
                     controller.doAction(Actions.adjustBorderSplit(node.getId(), pos).setAdjusting(adjusting));
                 } else {
                     const init = initialSizes.current;
