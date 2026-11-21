@@ -118,7 +118,7 @@ export class Rect {
     styleWithPosition(style: React.CSSProperties | CSSStyleDeclaration, position: React.CSSProperties["position"] = "absolute") {
         style.left = this.x + "px";
         style.top = this.y + "px";
-        style.width = Math.max(0, this.width) + "px"; // need Math.max to prevent -ve, cause error in IE
+        style.width = Math.max(0, this.width) + "px"; // clamp to zero: negative sizes are invalid CSS
         style.height = Math.max(0, this.height) + "px";
         style.position = position;
         return style;
