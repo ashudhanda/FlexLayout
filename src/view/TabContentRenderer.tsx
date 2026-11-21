@@ -56,6 +56,6 @@ function arePropsEqual(prevProps: ITabContentRenderProps, nextProps: ITabContent
             prevProps.fullRedrawRevision !== nextProps.fullRedrawRevision ||
             prevProps.parentRedrawRevision !== nextProps.parentRedrawRevision ||
             prevProps.tabNode !== nextProps.tabNode || // node instance replaced (fromJson with a previous model)
-            nextProps.tabNode.getSubLayoutId() !== undefined);
+            prevProps.tabNode.getSubLayoutId() !== nextProps.tabNode.getSubLayoutId()); // sub-layout assignment changed
     return !reRender;
 }
