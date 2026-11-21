@@ -102,8 +102,7 @@ export class DockLocation {
             return new Rect(r.x, r.y, r.width, r.height / 2);
         } else if (this === DockLocation.BOTTOM) {
             return new Rect(r.x, r.getBottom() - r.height / 2, r.width, r.height / 2);
-        }
-        if (this === DockLocation.LEFT) {
+        } else if (this === DockLocation.LEFT) {
             return new Rect(r.x, r.y, r.width / 2, r.height);
         } else if (this === DockLocation.RIGHT) {
             return new Rect(r.getRight() - r.width / 2, r.y, r.width / 2, r.height);
