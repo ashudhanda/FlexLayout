@@ -20,7 +20,10 @@ function getChildLineRect(child: TabNode | TabGroupNode, x: number, y: number, v
     if (r === undefined) {
         return undefined;
     }
-    return vertical ? (r.x <= x && x <= r.getRight() ? r : undefined) : r.y <= y && y <= r.getBottom() ? r : undefined;
+    // only the cursor's line matters: in a vertical strip the cursor's x must fall
+    // inside the tab, in a horizontal strip its y
+    const onLine = vertical ? r.x <= x && x <= r.getRight() : r.y <= y && y <= r.getBottom();
+    return onLine ? r : undefined;
 }
 
 /** @internal the "drop before this element" outline: a vertical bar (horizontal flow) or a
