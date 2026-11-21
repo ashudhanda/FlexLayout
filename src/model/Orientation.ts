@@ -7,7 +7,15 @@ export class Orientation {
 
     /** The opposite orientation (used when nesting rows inside rows). */
     static flip(from: Orientation) {
-        return from === Orientation.HORZ ? Orientation.VERT : Orientation.HORZ;
+        if (from === Orientation.HORZ) {
+            return Orientation.VERT;
+        }
+        if (from === Orientation.VERT) {
+            return Orientation.HORZ;
+        }
+        // fail loudly: silently returning HORZ for an unknown value would lay
+        // the row out in the wrong direction, far from the bad value
+        throw new Error("Unknown Orientation: " + from);
     }
 
     /** @internal */
