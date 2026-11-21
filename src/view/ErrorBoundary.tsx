@@ -32,8 +32,7 @@ export class ErrorBoundary extends React.Component<IErrorBoundaryProps, IErrorBo
     componentDidCatch(error: Error, errorInfo: ErrorInfo) {
         // logged at debug level: the fallback UI (role="alert") is the user-facing signal,
         // so render errors stay inspectable without noisy console output
-        console.debug(error);
-        console.debug(errorInfo);
+        console.debug(error, errorInfo);
     }
 
     retry = () => {
