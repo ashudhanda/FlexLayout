@@ -138,8 +138,10 @@ export class TabNode extends Node implements IDraggable {
         if (closeable && this.getSubLayoutId()) {
             const layout = this.model.getLayouts().get(this.getSubLayoutId()!);
             if (layout) {
-                // the subLayoutId may be dangling (e.g. hand edited json)
-                closeable = layout.getRootRow()!.isCloseable();
+                // the subLayoutId may be dangling (e.g. hand edited json); a layout with no
+                // root row (e.g. added programmatically before its row is set) keeps the
+                // tab's own closeable value instead of throwing on undefined
+                closeable = layout.getRootRow()?.isCloseable() ?? closeable;
             }
         }
         return closeable;
@@ -150,8 +152,9 @@ export class TabNode extends Node implements IDraggable {
         if (allowed && this.getSubLayoutId()) {
             const layout = this.model.getLayouts().get(this.getSubLayoutId()!);
             if (layout) {
-                // the subLayoutId may be dangling (e.g. hand edited json)
-                allowed = layout.getRootRow()!.isAllowedInWindow();
+                // the subLayoutId may be dangling (e.g. hand edited json); a layout with no
+                // root row keeps the tab's own value instead of throwing on undefined
+                allowed = layout.getRootRow()?.isAllowedInWindow() ?? allowed;
             }
         }
         return allowed;
