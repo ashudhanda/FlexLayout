@@ -179,7 +179,12 @@ export const useTabOverflow = (
             const visibleNear = getNear(stripRect) - 1;
             const visibleFar = getFar(stripRect) + 1;
 
-            const tabContainer = strip.firstElementChild!;
+            const tabContainer = strip.firstElementChild;
+            if (!tabContainer) {
+                // the strip has no tab container yet (e.g. mounted with no tabs):
+                // there is nothing to measure, so no tab can be hidden
+                return hidden;
+            }
 
             let i = 0;
             Array.from(tabContainer.children).forEach((child) => {
