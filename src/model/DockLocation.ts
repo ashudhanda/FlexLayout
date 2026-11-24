@@ -35,6 +35,12 @@ export class DockLocation {
         x = (x - rect.x) / rect.width;
         y = (y - rect.y) / rect.height;
 
+        // a NaN point (e.g. from a bad pointer event) compares false against every edge
+        // below and would silently fall through to TOP; treat it as a center drop
+        if (Number.isNaN(x) || Number.isNaN(y)) {
+            return DockLocation.CENTER;
+        }
+
         if (!excludeCenter && x >= 0.25 && x < 0.75 && y >= 0.25 && y < 0.75) {
             return DockLocation.CENTER;
         }
