@@ -59,6 +59,15 @@ export function randomUUID(): string {
         // @ts-expect-error - crypto may be undeclared in some global typings
         return crypto.randomUUID();
     }
-    // @ts-expect-error - crypto may be undeclared in some global typings
-    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) => (c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))).toString(16));
+    if (typeof crypto !== "undefined" && typeof crypto.getRandomValues === "function") {
+        // @ts-expect-error - the [1e7] + ... template relies on array-to-string coercion
+        return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) => (c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))).toString(16));
+    }
+    // no crypto at all (non-secure context / old environment): the getRandomValues
+    // fallback above would throw a ReferenceError on the bare `crypto` reference,
+    // so fall back to a Math.random-based v4-shaped id instead (not cryptographically random)
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+        const r = (Math.random() * 16) | 0;
+        return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
+    });
 }
