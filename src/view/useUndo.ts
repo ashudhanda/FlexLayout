@@ -9,7 +9,7 @@ const DEFAULT_IGNORE_ACTION_TYPES = [Actions.SET_ACTIVE_TABSET];
  * Options for the {@link useUndo} hook
  */
 export interface IUndoOptions {
-    /** maximum number of undo steps to retain, default 100 */
+    /** maximum number of undo steps to retain, default 100; values below 1 are treated as 1, so undo is never silently disabled */
     maxBufferSize?: number;
     /** action types that should not create an undo step, default [Actions.SET_ACTIVE_TABSET] */
     ignoreActionTypes?: string[];
@@ -61,7 +61,10 @@ export interface IUseUndoResult {
  * @param options optional configuration
  */
 export function useUndo(initialModel?: Model | null | (() => Model | null), options?: IUndoOptions): IUseUndoResult {
-    const maxBufferSize = options?.maxBufferSize ?? 100;
+    // clamp to at least 1: a maxBufferSize of 0 (or negative) shifted every pushed snapshot
+    // straight back out, so undo silently never worked
+    const requestedBufferSize = options?.maxBufferSize;
+    const maxBufferSize = typeof requestedBufferSize === "number" && Number.isFinite(requestedBufferSize) ? Math.max(1, Math.floor(requestedBufferSize)) : 100;
     const ignoreActionTypes = options?.ignoreActionTypes ?? DEFAULT_IGNORE_ACTION_TYPES;
 
     const [model, setModelState] = React.useState<Model | null>(() => {
