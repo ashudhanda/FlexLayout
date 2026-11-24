@@ -236,6 +236,10 @@ export function copyInlineStyles(source: HTMLElement, target: HTMLElement): bool
 
 /** @internal True on genuine Safari (user agent contains "Safari" but neither "Chrome" nor "Chromium"). */
 export function isSafari() {
+    // server-side rendering has no navigator: report false instead of throwing a ReferenceError
+    if (typeof navigator === "undefined") {
+        return false;
+    }
     const userAgent = navigator.userAgent;
     return userAgent.includes("Safari") && !userAgent.includes("Chrome") && !userAgent.includes("Chromium");
 }
