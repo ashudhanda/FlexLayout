@@ -93,7 +93,7 @@ export const RestoreIcon = () => {
 };
 RestoreIcon.displayName = "RestoreIcon"; // name in react dev tools
 
-export const AsterickIcon = () => {
+export const AsteriskIcon = () => {
     return (
         <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" style={style} height="24px" viewBox="0 -960 960 960" width="24px">
             <path
@@ -104,7 +104,13 @@ export const AsterickIcon = () => {
         </svg>
     );
 };
-AsterickIcon.displayName = "AsterickIcon"; // name in react dev tools
+AsteriskIcon.displayName = "AsteriskIcon"; // name in react dev tools
+
+/**
+ * @deprecated misspelled; use {@link AsteriskIcon} instead. Kept so existing
+ * imports keep working (same component, including its displayName).
+ */
+export const AsterickIcon = AsteriskIcon;
 
 export const AddIcon = () => {
     return (
