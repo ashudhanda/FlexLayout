@@ -27,12 +27,17 @@ export const TabContentRenderer = React.memo(({ controller, tabNode }: ITabConte
         content = controller.getFactory()(tabNode);
     } else if (tabNode.getSubLayoutId()) {
         const model = tabNode.getModel();
-        const subLayout = model.getLayouts().get(tabNode.getSubLayoutId()!)!;
-        content = (
-            <div className={controller.getClassName(CLASSES.FLEXLAYOUT__TAB_LAYOUT_CONTAINER)}>
-                <LayoutInternal {...controller.getProps()} layoutId={tabNode.getSubLayoutId()} path={tabNode.getPath() + subLayout.getPath()} mainLayoutController={controller.getMainController()} />;
-            </div>
-        );
+        const subLayout = model.getLayouts().get(tabNode.getSubLayoutId()!);
+        // a dangling subLayoutId (e.g. hand-edited JSON, or a layout removed without
+        // clearing the tab) has no layout to render: show nothing instead of
+        // throwing on undefined, which would unmount the whole layout
+        if (subLayout) {
+            content = (
+                <div className={controller.getClassName(CLASSES.FLEXLAYOUT__TAB_LAYOUT_CONTAINER)}>
+                    <LayoutInternal {...controller.getProps()} layoutId={tabNode.getSubLayoutId()} path={tabNode.getPath() + subLayout.getPath()} mainLayoutController={controller.getMainController()} />;
+                </div>
+            );
+        }
     }
     return (
         <ErrorBoundary message={controller.i18nName(I18nLabel.Error_rendering_component)} retryText={controller.i18nName(I18nLabel.Error_rendering_component_retry)}>
