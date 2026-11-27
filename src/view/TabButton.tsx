@@ -5,9 +5,21 @@ import { TabNode } from "../model/TabNode";
 import { TabSetNode } from "../model/TabSetNode";
 import { TabGroupNode } from "../model/TabGroupNode";
 import { LayoutController } from "./layout/LayoutInternal";
-import { ICloseType } from "../model/ICloseType";
 import { CLASSES } from "./CSSClassNames";
-import { domId, focusFirstIn, getRenderStateEx, hasModifier, isAuxMouseEvent, matchesKey, toAriaKeyShortcuts } from "./Utils";
+import {
+    domId,
+    focusAdjacentTabButton,
+    focusTabContent,
+    getRenderStateEx,
+    handleRenameTextBoxKeyDown,
+    handleTabCloseClick,
+    hasModifier,
+    isAuxMouseEvent,
+    matchesKey,
+    toAriaKeyShortcuts,
+    useEndRenameOnOutsidePointerDown,
+    useSelectRenameTextOnEdit,
+} from "./Utils";
 
 /** @internal */
 export interface ITabButtonProps {
@@ -35,26 +47,8 @@ export const TabButton = (props: ITabButtonProps) => {
         [controller, tabNode],
     );
 
-    React.useLayoutEffect(() => {
-        if (editing) {
-            (contentRef.current! as HTMLInputElement).select();
-        }
-    }, [editing]);
-
-    // end the edit on any pointer down outside the textbox
-    React.useEffect(() => {
-        if (editing) {
-            const body = controller.getCurrentDocument()!.body;
-            const onEndEdit = (event: Event) => {
-                if (event.target !== contentRef.current) {
-                    controller.setEditingTab(undefined);
-                }
-            };
-            body.addEventListener("pointerdown", onEndEdit);
-            return () => body.removeEventListener("pointerdown", onEndEdit);
-        }
-        return undefined;
-    }, [editing, controller]);
+    useSelectRenameTextOnEdit(editing, contentRef);
+    useEndRenameOnOutsidePointerDown(editing, controller, contentRef);
 
     const onDragStart = (event: React.DragEvent<HTMLElement>) => {
         if (tabNode.isEnableDrag()) {
@@ -85,49 +79,29 @@ export const TabButton = (props: ITabButtonProps) => {
         }
     };
 
-    const focusAdjacentTab = (delta: number) => {
-        const tablist = selfRef.current?.closest('[role="tablist"]');
-        if (tablist) {
-            const tabElements = Array.from(tablist.querySelectorAll('[role="tab"]')) as HTMLElement[];
-            const next = tabElements[tabElements.indexOf(selfRef.current!) + delta];
-            next?.focus();
-        }
-    };
-
-    // move focus into the tab content: the first focusable element, or the panel itself
-    const focusTabContent = () => {
-        const doc = selfRef.current!.ownerDocument;
-        const focusPanel = () => focusFirstIn(doc.getElementById(domId("flexlayout-tab-", tabNode.getId())));
-        if (selected) {
-            focusPanel();
-        } else {
-            onClick(); // select first, focus once the panel is shown
-            requestAnimationFrame(focusPanel);
-        }
-    };
-
     const onKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
         if (editing) {
             return; // the rename textbox handles its own keys
         }
         if (matchesKey(event, keyMap.focusTabToggle)) {
-            focusTabContent();
+            // move focus into the tab content: the first focusable element, or the panel itself
+            focusTabContent(tabNode, controller, selected, onClick, selfRef.current);
             event.preventDefault();
         } else if (event.key === "Enter" || event.key === " ") {
             if (selected) {
-                focusTabContent(); // activating an already selected tab enters its content
+                focusTabContent(tabNode, controller, selected, onClick, selfRef.current); // activating an already selected tab enters its content
             } else {
                 onClick();
             }
             event.preventDefault();
         } else if ((event.key === "ArrowLeft" || event.key === "ArrowUp") && !hasModifier(event)) {
-            focusAdjacentTab(-1);
+            focusAdjacentTabButton(selfRef.current, -1);
             event.preventDefault();
         } else if ((event.key === "ArrowRight" || event.key === "ArrowDown") && !hasModifier(event)) {
-            focusAdjacentTab(1);
+            focusAdjacentTabButton(selfRef.current, 1);
             event.preventDefault();
         } else if (matchesKey(event, keyMap.closeTab) && tabNode.isCloseable()) {
-            focusAdjacentTab(1); // move focus to a neighbour before this tab is removed
+            focusAdjacentTabButton(selfRef.current, 1); // move focus to a neighbour before this tab is removed
             controller.doAction(Actions.deleteTab(tabNode.getId()));
             event.preventDefault();
         } else if (matchesKey(event, keyMap.renameTab) && tabNode.isEnableRename()) {
@@ -147,25 +121,8 @@ export const TabButton = (props: ITabButtonProps) => {
         controller.setEditingTab(tabNode);
     };
 
-    const isClosable = () => {
-        const closeType = tabNode.getCloseType();
-        if (selected || closeType === ICloseType.Always) {
-            return true;
-        }
-        if (closeType === ICloseType.Visible) {
-            // not selected but x should be visible due to hover
-            if (window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-                return true;
-            }
-        }
-        return false;
-    };
-
     const onClose = (event: React.MouseEvent<HTMLElement>) => {
-        if (isClosable()) {
-            controller.doAction(Actions.deleteTab(tabNode.getId()));
-            event.stopPropagation();
-        }
+        handleTabCloseClick(event, controller, tabNode, selected);
     };
 
     const onClosePointerDown = (event: React.PointerEvent<HTMLElement>) => {
@@ -177,14 +134,7 @@ export const TabButton = (props: ITabButtonProps) => {
     };
 
     const onTextBoxKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.code === "Escape") {
-            controller.setEditingTab(undefined);
-            selfRef.current?.focus(); // return focus to the tab button
-        } else if (event.code === "Enter" || event.code === "NumpadEnter") {
-            controller.setEditingTab(undefined);
-            controller.doAction(Actions.renameTab(tabNode.getId(), (event.target as HTMLInputElement).value));
-            selfRef.current?.focus(); // return focus to the tab button
-        }
+        handleRenameTextBoxKeyDown(event, controller, tabNode, selfRef.current);
     };
 
     const cm = controller.getClassName;
