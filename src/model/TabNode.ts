@@ -376,7 +376,12 @@ export class TabNode extends Node implements IDraggable {
 
     /** @internal */
     delete() {
-        (this.parent as TabSetNode | BorderNode | TabGroupNode).remove(this);
+        // a tab with no parent (e.g. constructed directly, never added to a
+        // tabset) has nothing to remove from; still delete its sublayout and
+        // fire close so callers can treat it like any other deletion
+        if (this.parent) {
+            (this.parent as TabSetNode | BorderNode | TabGroupNode).remove(this);
+        }
         this.deleteSubLayout();
         this.fireEvent("close", {});
     }
