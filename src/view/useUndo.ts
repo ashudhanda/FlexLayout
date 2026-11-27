@@ -144,6 +144,10 @@ export function useUndo(initialModel?: Model | null | (() => Model | null), opti
         }
         pushTo.push(JSON.stringify(current.toJson()));
         const next = Model.fromJson(JSON.parse(json), current);
+        // a drag gesture that was in progress when undo/redo ran captured its
+        // pre-gesture snapshot from the old model: drop it, so the next action's
+        // undo step is the current (post-undo) state instead of that stale snapshot
+        modelBeforeAdjusting.current = null;
         modelRef.current = next;
         setUndoCount(undoBuffer.current.length);
         setRedoCount(redoBuffer.current.length);
