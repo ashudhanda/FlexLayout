@@ -1,6 +1,8 @@
 import * as React from "react";
 import { Node } from "../model/Node";
 import { TabNode } from "../model/TabNode";
+import { Actions } from "../model/Actions";
+import { ICloseType } from "../model/ICloseType";
 import { LayoutController } from "./layout/LayoutInternal";
 import { ModelLayout } from "../model/ModelLayout";
 import { defaultKeyMap, IKeyMap } from "./layout/LayoutTypes";
@@ -113,6 +115,93 @@ export function focusFirstIn(container: HTMLElement | null) {
             'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
         ) as HTMLElement | null;
         (focusable ?? container).focus();
+    }
+}
+
+/** @internal move focus to the tab button `delta` places away in the same tablist, if any
+ * (shared by the tabset and border tab buttons for arrow-key navigation) */
+export function focusAdjacentTabButton(element: HTMLElement | null, delta: number) {
+    const tablist = element?.closest('[role="tablist"]');
+    if (tablist) {
+        const tabElements = Array.from(tablist.querySelectorAll('[role="tab"]')) as HTMLElement[];
+        const next = tabElements[tabElements.indexOf(element!) + delta];
+        next?.focus();
+    }
+}
+
+/** @internal whether the tab's close affordance is active: a selected tab and
+ * Always-type tabs are always closable; Visible-type tabs only where hover exists
+ * (desktop pointers), via the window-safe {@link isDesktop} check */
+export function isTabClosable(tabNode: TabNode, selected: boolean): boolean {
+    const closeType = tabNode.getCloseType();
+    if (selected || closeType === ICloseType.Always) {
+        return true;
+    }
+    if (closeType === ICloseType.Visible) {
+        return isDesktop();
+    }
+    return false;
+}
+
+/** @internal focus the tab's content panel (first focusable element, or the panel
+ * itself). Selects the tab first when it is not selected, focusing once the panel
+ * is shown. Shared by the tabset and border tab buttons. */
+export function focusTabContent(tabNode: TabNode, controller: LayoutController, selected: boolean, selectTab: () => void, tabButtonElement: HTMLElement | null) {
+    const doc = tabButtonElement?.ownerDocument;
+    const focusPanel = () => focusFirstIn(doc ? doc.getElementById(domId("flexlayout-tab-", tabNode.getId())) : null);
+    if (selected) {
+        focusPanel();
+    } else {
+        selectTab();
+        requestAnimationFrame(focusPanel);
+    }
+}
+
+/** @internal shared rename-textbox keys: Escape cancels, Enter commits the new name
+ * via a rename action; focus returns to the tab button in both cases */
+export function handleRenameTextBoxKeyDown(event: React.KeyboardEvent<HTMLInputElement>, controller: LayoutController, tabNode: TabNode, tabButtonElement: HTMLElement | null) {
+    if (event.code === "Escape") {
+        controller.setEditingTab(undefined);
+        tabButtonElement?.focus();
+    } else if (event.code === "Enter" || event.code === "NumpadEnter") {
+        controller.setEditingTab(undefined);
+        controller.doAction(Actions.renameTab(tabNode.getId(), (event.target as HTMLInputElement).value));
+        tabButtonElement?.focus();
+    }
+}
+
+/** @internal while a tab is being renamed, select the textbox contents when the edit starts */
+export function useSelectRenameTextOnEdit(editing: boolean, contentRef: React.RefObject<HTMLInputElement | null>) {
+    React.useLayoutEffect(() => {
+        if (editing) {
+            contentRef.current?.select();
+        }
+    }, [editing, contentRef]);
+}
+
+/** @internal while a tab is being renamed, end the edit on any pointer down outside the textbox */
+export function useEndRenameOnOutsidePointerDown(editing: boolean, controller: LayoutController, contentRef: React.RefObject<HTMLInputElement | null>) {
+    React.useEffect(() => {
+        if (editing) {
+            const body = controller.getCurrentDocument()!.body;
+            const onEndEdit = (event: Event) => {
+                if (event.target !== contentRef.current) {
+                    controller.setEditingTab(undefined);
+                }
+            };
+            body.addEventListener("pointerdown", onEndEdit);
+            return () => body.removeEventListener("pointerdown", onEndEdit);
+        }
+        return undefined;
+    }, [editing, controller, contentRef]);
+}
+
+/** @internal close the tab from its pointer-only close button (a no-op when the tab
+ * is not closable); stops propagation so the tab itself is not selected */
+export function handleTabCloseClick(event: React.MouseEvent<HTMLElement>, controller: LayoutController, tabNode: TabNode, selected: boolean) {
+    if (isTabClosable(tabNode, selected)) {
+        controller.doAction(Actions.deleteTab(tabNode.getId()));
+        event.stopPropagation();
     }
 }
 
