@@ -524,8 +524,15 @@ export class Model {
                 const oldLayout = this.layouts.get(action.data.layoutId);
                 if (oldLayout) {
                     oldLayout.setType("float");
-                    const r = this.mainLayout.getController()!.getDomRect()!;
-                    oldLayout.setRect(new Rect(r.width / 4, r.height / 4, r.width / 2, r.height / 2));
+                    // the main layout may not be mounted (e.g. the popout is closed
+                    // before first render, or the model is used headless): only
+                    // reposition the float when a real main-layout rect is available,
+                    // and never collapse it to a zero-size rect
+                    const mainController = this.mainLayout.getController();
+                    const r = mainController?.getDomRect();
+                    if (r && r.width > 0 && r.height > 0) {
+                        oldLayout.setRect(new Rect(r.width / 4, r.height / 4, r.width / 2, r.height / 2));
+                    }
                 }
                 break;
             }
